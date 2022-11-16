@@ -59,6 +59,7 @@
             // NewGameToolStripMenuItem
             // 
             this.NewGameToolStripMenuItem.Name = "NewGameToolStripMenuItem";
+            this.NewGameToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             this.NewGameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.NewGameToolStripMenuItem.Text = "&New game";
             // 
@@ -70,6 +71,7 @@
             // ExitToolStripMenuItem
             // 
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
+            this.ExitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
             this.ExitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ExitToolStripMenuItem.Text = "&Exit";
             // 
