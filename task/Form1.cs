@@ -12,6 +12,9 @@ namespace task
     /// • предусмотреть возможность начать новую игру.
     /// </summary>
 
+    // Ссылка на класс реализующий логику игры.
+    private readonly Game _game;
+
     // Конструтор формы.
     public partial class Form1 : Form
     {
@@ -50,6 +53,29 @@ namespace task
             {12, 13, 14, 15}
         };
 
-
+        // Метод перемешивает матрицу. Игра "Пятнашки".
+        void ShakeArr()
+        {
+            Random r = new Random();
+            int min = 0;
+            int max = 3;
+            int row = 0, col = 0;
+            int n = 3;
+            while (n > 0)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    for (int j = 0; j < 4; j++)
+                    {
+                        row = r.Next();
+                        col = r.Next();
+                        int temp = arr[i][j];
+                        arr[i][j] = arr[row][col];
+                        arr[row][col] = temp;
+                    }
+                }
+                n--;
+            }
+        }
     }
 }
