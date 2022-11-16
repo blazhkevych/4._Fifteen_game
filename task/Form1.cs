@@ -72,6 +72,8 @@ namespace task
             // Shuffle array.
             _game.ShuffleArray();
 
+            // пересмотреть сортировку и писать дальше.
+
         }
 
         // Menu item "Exit".
