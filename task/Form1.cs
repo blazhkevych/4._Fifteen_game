@@ -131,7 +131,7 @@ namespace task
         }
 
         // Принимает Controll из формы, и каждой кнопке назначает сооветствующее число.
-        public void SetAllButtonsText(Control.ControlCollection control) 
+        public void SetAllButtonsText(Control.ControlCollection control)
         {
             var i = 15;
             do
@@ -143,10 +143,11 @@ namespace task
             } while (i > 0);
         }
 
-        // Реализация хода.
-        void Move()
+        // Возвращает координаты пустого квадрата.
+        public Point GetEmptySquareCoordinates()
         {
             // Находим координаты пустой кнопки.
+            Point p = new Point();
             int emptyButtonRowPos = 0;
             int emptyButtonColPos = 0;
             for (int i = 0; i < 4; i++)
@@ -155,15 +156,16 @@ namespace task
                 {
                     if (_arr[i, j] == 0)
                     {
-                        emptyButtonRowPos = i;
-                        emptyButtonColPos = j;
+                        p.X = i;
+                        p.Y = j;
                     }
                 }
             }
 
-
-
+            return p;
         }
+
+
 
 
 
