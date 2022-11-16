@@ -67,12 +67,12 @@ namespace task
             gameField_button15.Enabled = true;
             gameField_button16.Enabled = true;
 
-            // Displaying the playing field on the buttons.
-            _game.SetCurrentArrIntoButtonsText(Controls);
             // Shuffle array.
             _game.ShuffleArray();
+            // Displaying the playing field on the buttons.
+            _game.SetCurrentArrIntoButtonsText(Controls);
 
-            // todo:пересмотреть сортировку и писать дальше.
+            // todo: пересмотреть сортировку и писать дальше.
 
         }
 
