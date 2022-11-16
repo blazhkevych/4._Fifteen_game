@@ -18,6 +18,7 @@ namespace task
         public Form1()
         {
             InitializeComponent();
+            
         }
 
         // Контекстный пункт меню "Новая игра".
@@ -29,7 +30,7 @@ namespace task
         // Контекстный пункт меню "Выход".
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Close();
         }
     }
 
