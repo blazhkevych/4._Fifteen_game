@@ -133,12 +133,17 @@ namespace task
         // Принимает Controll из формы, и каждой кнопке назначает сооветствующее число.
         public void SetAllButtonsText(Control.ControlCollection controlCollection)
         {
-            int i = 1;
+            int k = 1;
             for (int j = 0; j < _arr.Length; j++)
             {
-                foreach (Control control in controlCollection)
+
+                for (int l = 0; l < _arr.Length; l++)
                 {
-                    if(control is Button && ((Button)control).Name == "gameField_button" + i)
+                    foreach (Control control in controlCollection)
+                    {
+                        //if (control is Button && ((Button)control).Name == "gameField_button" + k)
+                        //(Button)control).
+                    }
                 }
             }
 
