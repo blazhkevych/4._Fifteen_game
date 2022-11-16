@@ -12,20 +12,42 @@ namespace task
     /// • предусмотреть возможность начать новую игру.
     /// </summary>
 
-    // Ссылка на класс реализующий логику игры.
-    private readonly Game _game;
 
     // Конструтор формы.
     public partial class Form1 : Form
     {
+        // Ссылка на класс реализующий логику игры.
+        private readonly Game _game;
         public Form1()
         {
             InitializeComponent();
+
+            // Перед игрой отключаем поле с кнопками.
+            // Будет включено только после нажатия кнопки "Начать игру".
+            gameField_button1.Enabled = false;
+            gameField_button2.Enabled = false;
+            gameField_button3.Enabled = false;
+            gameField_button4.Enabled = false;
+            gameField_button5.Enabled = false;
+            gameField_button6.Enabled = false;
+            gameField_button7.Enabled = false;
+            gameField_button8.Enabled = false;
+            gameField_button9.Enabled = false;
+            gameField_button10.Enabled = false;
+            gameField_button11.Enabled = false;
+            gameField_button12.Enabled = false;
+            gameField_button13.Enabled = false;
+            gameField_button14.Enabled = false;
+            gameField_button15.Enabled = false;
+            gameField_button16.Enabled = false;
+
+            _game = new Game();
         }
 
         // Контекстный пункт меню "Новая игра".
         private void NewGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            
 
         }
 
@@ -35,8 +57,10 @@ namespace task
             Close();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        // Тик таймера. 
+        private void timer1_Tick(object sender, EventArgs e)
         {
+            // Вывод в заголовок затраченного времени на прохождение
 
         }
     }
@@ -53,12 +77,11 @@ namespace task
             {12, 13, 14, 15}
         };
 
-        // Метод перемешивает матрицу. Игра "Пятнашки".
+        // Перемешивает матрицу. Игра "Пятнашки".
         void ShakeArr()
         {
             Random r = new Random();
-            int min = 0;
-            int max = 3;
+            
             int row = 0, col = 0;
             int n = 3;
             while (n > 0)
@@ -69,9 +92,9 @@ namespace task
                     {
                         row = r.Next();
                         col = r.Next();
-                        int temp = arr[i][j];
-                        arr[i][j] = arr[row][col];
-                        arr[row][col] = temp;
+                        int temp = arr[i, j];
+                        arr[i, j] = arr[row, col];
+                        arr[row, col] = temp;
                     }
                 }
                 n--;
