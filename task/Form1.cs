@@ -18,7 +18,6 @@ namespace task
         public Form1()
         {
             InitializeComponent();
-            
         }
 
         // Контекстный пункт меню "Новая игра".
