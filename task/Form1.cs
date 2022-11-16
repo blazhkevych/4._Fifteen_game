@@ -15,17 +15,17 @@ namespace task
     /// </summary>
 
 
-    // Конструтор формы.
+    // Form constructor.
     public partial class Form1 : Form
     {
-        // Ссылка на класс реализующий логику игры.
+        // Link to the class that implements the game logic.
         private readonly Game _game;
         public Form1()
         {
             InitializeComponent();
 
-            // Перед игрой отключаем поле с кнопками.
-            // Будет включено только после нажатия кнопки "Начать игру".
+            // Turn off the playing field before starting the game.
+            // Will be enabled only after clicking the "Start game" button.
             gameField_button1.Enabled = false;
             gameField_button2.Enabled = false;
             gameField_button3.Enabled = false;
@@ -46,10 +46,10 @@ namespace task
             _game = new Game();
         }
 
-        // Контекстный пункт меню "Новая игра".
+        // Menu item "New game".
         private void NewGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Включаем игровое поле.
+            // Turn on the playing field.
             gameField_button1.Enabled = true;
             gameField_button2.Enabled = true;
             gameField_button3.Enabled = true;
@@ -67,46 +67,46 @@ namespace task
             gameField_button15.Enabled = true;
             gameField_button16.Enabled = true;
 
-            // Заполняет кнопки на игровом поле случайными числами от 0 до 100 и выставляет их в текст кнопок.
-            _game.SetAllButtonsText(Controls);
-            // Перемешиваем массив.
+            // Displaying the playing field on the buttons.
+            _game.SetCurrentArrIntoButtonsText(Controls);
+            // Shuffle array.
             _game.ShakeArr();
 
         }
 
-        // Контекстный пункт меню "Выход".
+        // Menu item "Exit".
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        // Тик таймера. 
+        // Timer tick. 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            // Вывод в заголовок затраченного времени на прохождение
+            // Output in the title of the time spent on the passage of the game.
 
         }
 
-        // Клик по игровому полю.
+        // Click on the playing field.
         private void gameField_button1_Click(object sender, EventArgs e)
         {
 
         }
     }
 
-    // Класс реализующий логику игры.
+    // The class that implements the logic of the game.
     internal class Game
     {
-        // Массив для хранения значений кнопок.
+        // Array for storing button values.
         int[,] _arr =
         {
-            {0, 1, 2, 3},
-            {4, 5, 6, 7},
-            {8, 9, 10, 11},
-            {12, 13, 14, 15}
+            {1, 2, 3, 4},
+            { 5, 6, 7, 8},
+            {9, 10, 11, 12},
+            {13, 14, 15, 0}
         };
 
-        // Перемешивает матрицу. Игра "Пятнашки".
+        // Shuffle array.
         public void ShakeArr()
         {
             Random r = new Random();
@@ -130,38 +130,31 @@ namespace task
             }
         }
 
-        // Принимает Controll из формы, и каждой кнопке назначает сооветствующее число.
-        public void SetAllButtonsText(Control.ControlCollection controlCollection)
+        // Displaying the playing field on the buttons.
+        public void SetCurrentArrIntoButtonsText(Control.ControlCollection controlCollection)
         {
             int k = 1;
-            for (int j = 0; j < _arr.Length; j++)
+            for (int i = 0; i < 4; i++)
             {
 
-                for (int l = 0; l < _arr.Length; l++)
+                for (int j = 0; j < 4; j++)
                 {
                     foreach (Control control in controlCollection)
                     {
-                        //if (control is Button && ((Button)control).Name == "gameField_button" + k)
-                        //(Button)control).
+                        if (control is Button && ((Button)control).Name == "gameField_button" + k)
+                        {
+                            ((Button)control).Text = _arr[i, j].ToString();
+                            k++;
+                        }
                     }
                 }
             }
-
-
-            var i = 15;
-            do
-            {
-                foreach (var obj in control)
-                    if (obj is Button && ((Button)obj).Name == "gameField_button" + i)
-                        ((Button)obj).Text = i.ToString();
-                i++;
-            } while (i < 17);
         }
 
-        // Возвращает координаты пустого квадрата.
+        // Returns the coordinates of the empty square.
         public Point GetEmptySquareCoordinates()
         {
-            // Находим координаты пустой кнопки.
+            // Find the coordinates of the empty button.
             Point p = new Point();
             int emptyButtonRowPos = 0;
             int emptyButtonColPos = 0;
