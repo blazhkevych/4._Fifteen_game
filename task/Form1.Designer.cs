@@ -53,14 +53,14 @@
             this.toolStripSeparator1,
             this.ExitToolStripMenuItem});
             this.MenuToolStripMenuItem.Name = "MenuToolStripMenuItem";
-            this.MenuToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
-            this.MenuToolStripMenuItem.Text = "Меню";
+            this.MenuToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.MenuToolStripMenuItem.Text = "&Menu";
             // 
             // NewGameToolStripMenuItem
             // 
             this.NewGameToolStripMenuItem.Name = "NewGameToolStripMenuItem";
             this.NewGameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.NewGameToolStripMenuItem.Text = "Новая игра";
+            this.NewGameToolStripMenuItem.Text = "&New game";
             // 
             // toolStripSeparator1
             // 
@@ -71,7 +71,7 @@
             // 
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
             this.ExitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.ExitToolStripMenuItem.Text = "Выход";
+            this.ExitToolStripMenuItem.Text = "&Exit";
             // 
             // Form1
             // 
