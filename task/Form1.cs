@@ -67,7 +67,7 @@ namespace task
             gameField_button15.Enabled = true;
             gameField_button16.Enabled = true;
 
-            // «аполн€ет кнопки на игровом поле случайными числами от 0 до 100 и выставл€ет их в текст.
+            // «аполн€ет кнопки на игровом поле случайными числами от 0 до 100 и выставл€ет их в текст кнопок.
             _game.SetAllButtonsText(Controls);
             // ѕеремешиваем массив.
             _game.ShakeArr();
@@ -131,16 +131,26 @@ namespace task
         }
 
         // ѕринимает Controll из формы, и каждой кнопке назначает сооветствующее число.
-        public void SetAllButtonsText(Control.ControlCollection control)
+        public void SetAllButtonsText(Control.ControlCollection controlCollection)
         {
+            int i = 1;
+            for (int j = 0; j < _arr.Length; j++)
+            {
+                foreach (Control control in controlCollection)
+                {
+                    if(control is Button && ((Button)control).Name == "gameField_button" + i)
+                }
+            }
+
+
             var i = 15;
             do
             {
                 foreach (var obj in control)
                     if (obj is Button && ((Button)obj).Name == "gameField_button" + i)
                         ((Button)obj).Text = i.ToString();
-                i--;
-            } while (i > 0);
+                i++;
+            } while (i < 17);
         }
 
         // ¬озвращает координаты пустого квадрата.
