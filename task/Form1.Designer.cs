@@ -109,6 +109,7 @@
             this.gameField_button1.TabIndex = 1;
             this.gameField_button1.Text = "button1";
             this.gameField_button1.UseVisualStyleBackColor = true;
+            this.gameField_button1.Click += new System.EventHandler(this.gameField_button1_Click);
             // 
             // gameField_button2
             // 

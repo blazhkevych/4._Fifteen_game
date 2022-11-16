@@ -1,3 +1,5 @@
+using System.Drawing;
+
 namespace task
 {
     /// <summary>
@@ -66,7 +68,7 @@ namespace task
             gameField_button16.Enabled = true;
 
             // Заполняет кнопки на игровом поле случайными числами от 0 до 100 и выставляет их в текст.
-            _game.SetAllButtonsTextFromArr(Controls);
+            _game.SetAllButtonsText(Controls);
 
         }
 
@@ -80,6 +82,12 @@ namespace task
         private void timer1_Tick(object sender, EventArgs e)
         {
             // Вывод в заголовок затраченного времени на прохождение
+
+        }
+
+        // Клик по игровому полю.
+        private void gameField_button1_Click(object sender, EventArgs e)
+        {
 
         }
     }
@@ -100,7 +108,7 @@ namespace task
         void ShakeArr()
         {
             Random r = new Random();
-            
+
             int row = 0, col = 0;
             int n = 3;
             while (n > 0)
@@ -120,8 +128,8 @@ namespace task
             }
         }
 
-        // Принимает Controll из формы, и каждой кнопке назначает сооветствующее число из массива.
-        public void SetAllButtonsTextFromArr(Control.ControlCollection control)
+        // Принимает Controll из формы, и каждой кнопке назначает сооветствующее число.
+        public void SetAllButtonsText(Control.ControlCollection control)
         {
             var i = 15;
             do
@@ -130,8 +138,32 @@ namespace task
                     if (obj is Button && ((Button)obj).Name == "gameField_button" + i)
                         ((Button)obj).Text = i.ToString();
                 i--;
-            } while (i > 0 );
+            } while (i > 0);
         }
+
+        // Реализация хода.
+        void Move()
+        {
+            // Находим координаты пустой кнопки.
+            int emptyButtonRowPos = 0;
+            int emptyButtonColPos = 0;
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    if (_arr[i, j] == 0)
+                    {
+                        emptyButtonRowPos = i;
+                        emptyButtonColPos = j;
+                    }
+                }
+            }
+
+
+
+        }
+
+
 
     }
 }
