@@ -70,7 +70,7 @@ namespace task
             // Displaying the playing field on the buttons.
             _game.SetCurrentArrIntoButtonsText(Controls);
             // Shuffle array.
-            _game.ShakeArr();
+            _game.ShuffleArray();
 
         }
 
@@ -107,7 +107,7 @@ namespace task
         };
 
         // Shuffle array.
-        public void ShakeArr()
+        public void ShuffleArray()
         {
             Random r = new Random();
 
@@ -156,8 +156,7 @@ namespace task
         {
             // Find the coordinates of the empty button.
             Point p = new Point();
-            int emptyButtonRowPos = 0;
-            int emptyButtonColPos = 0;
+
             for (int i = 0; i < 4; i++)
             {
                 for (int j = 0; j < 4; j++)
