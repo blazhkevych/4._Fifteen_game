@@ -47,7 +47,26 @@ namespace task
         // Контекстный пункт меню "Новая игра".
         private void NewGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            // Включаем игровое поле.
+            gameField_button1.Enabled = true;
+            gameField_button2.Enabled = true;
+            gameField_button3.Enabled = true;
+            gameField_button4.Enabled = true;
+            gameField_button5.Enabled = true;
+            gameField_button6.Enabled = true;
+            gameField_button7.Enabled = true;
+            gameField_button8.Enabled = true;
+            gameField_button9.Enabled = true;
+            gameField_button10.Enabled = true;
+            gameField_button11.Enabled = true;
+            gameField_button12.Enabled = true;
+            gameField_button13.Enabled = true;
+            gameField_button14.Enabled = true;
+            gameField_button15.Enabled = true;
+            gameField_button16.Enabled = true;
+
+            // Заполняет кнопки на игровом поле случайными числами от 0 до 100 и выставляет их в текст.
+            _game.SetAllButtonsTextFromArr(Controls);
 
         }
 
@@ -69,7 +88,7 @@ namespace task
     internal class Game
     {
         // Массив для хранения значений кнопок.
-        int[,] arr =
+        int[,] _arr =
         {
             {0, 1, 2, 3},
             {4, 5, 6, 7},
@@ -92,13 +111,37 @@ namespace task
                     {
                         row = r.Next();
                         col = r.Next();
-                        int temp = arr[i, j];
-                        arr[i, j] = arr[row, col];
-                        arr[row, col] = temp;
+                        int temp = _arr[i, j];
+                        _arr[i, j] = _arr[row, col];
+                        _arr[row, col] = temp;
                     }
                 }
                 n--;
             }
         }
+
+        // Принимает Controll из формы, и каждой кнопке назначает сооветствующее число из массива.
+        public void SetAllButtonsTextFromArr(Control.ControlCollection control)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    
+                }
+            }   
+
+            //var i = 16;
+            //var arrIndex = 15;
+            //do
+            //{
+            //    foreach (var obj in control)
+            //        if (obj is Button && ((Button)obj).Name == "gameField_button" + i)
+            //            ((Button)obj).Text = _arr[arrIndex].ToString();
+            //    i--;
+            //    arrIndex--;
+            //} while (i > 0 && arrIndex > -1);
+        }
+
     }
 }
