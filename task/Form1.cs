@@ -69,6 +69,8 @@ namespace task
 
             // Заполняет кнопки на игровом поле случайными числами от 0 до 100 и выставляет их в текст.
             _game.SetAllButtonsText(Controls);
+            // Перемешиваем массив.
+            _game.ShakeArr();
 
         }
 
@@ -105,7 +107,7 @@ namespace task
         };
 
         // Перемешивает матрицу. Игра "Пятнашки".
-        void ShakeArr()
+        public void ShakeArr()
         {
             Random r = new Random();
 
@@ -117,8 +119,8 @@ namespace task
                 {
                     for (int j = 0; j < 4; j++)
                     {
-                        row = r.Next();
-                        col = r.Next();
+                        row = r.Next(0, 4);
+                        col = r.Next(0, 4);
                         int temp = _arr[i, j];
                         _arr[i, j] = _arr[row, col];
                         _arr[row, col] = temp;
@@ -129,7 +131,7 @@ namespace task
         }
 
         // Принимает Controll из формы, и каждой кнопке назначает сооветствующее число.
-        public void SetAllButtonsText(Control.ControlCollection control)
+        public void SetAllButtonsText(Control.ControlCollection control) 
         {
             var i = 15;
             do
