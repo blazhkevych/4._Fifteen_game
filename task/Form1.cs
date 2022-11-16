@@ -19,6 +19,18 @@ namespace task
         {
             InitializeComponent();
         }
+
+        // Контекстный пункт меню "Новая игра".
+        private void NewGameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        // Контекстный пункт меню "Выход".
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
     // Класс реализующий логику игры.
@@ -33,6 +45,6 @@ namespace task
             {12, 13, 14, 15}
         };
 
-        
+
     }
 }
