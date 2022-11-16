@@ -72,7 +72,7 @@ namespace task
             // Shuffle array.
             _game.ShuffleArray();
 
-            // пересмотреть сортировку и писать дальше.
+            // todo:пересмотреть сортировку и писать дальше.
 
         }
 
