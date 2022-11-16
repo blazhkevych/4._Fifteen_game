@@ -64,7 +64,8 @@
             this.MenuToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(342, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 3, 0, 3);
+            this.menuStrip1.Size = new System.Drawing.Size(391, 30);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -75,179 +76,195 @@
             this.toolStripSeparator1,
             this.ExitToolStripMenuItem});
             this.MenuToolStripMenuItem.Name = "MenuToolStripMenuItem";
-            this.MenuToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.MenuToolStripMenuItem.Size = new System.Drawing.Size(60, 24);
             this.MenuToolStripMenuItem.Text = "&Menu";
             // 
             // NewGameToolStripMenuItem
             // 
             this.NewGameToolStripMenuItem.Name = "NewGameToolStripMenuItem";
             this.NewGameToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.NewGameToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.NewGameToolStripMenuItem.Size = new System.Drawing.Size(217, 26);
             this.NewGameToolStripMenuItem.Text = "&New game";
             this.NewGameToolStripMenuItem.Click += new System.EventHandler(this.NewGameToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(171, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(214, 6);
             // 
             // ExitToolStripMenuItem
             // 
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
             this.ExitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(217, 26);
             this.ExitToolStripMenuItem.Text = "&Exit";
             this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
             // gameField_button1
             // 
-            this.gameField_button1.Location = new System.Drawing.Point(12, 36);
+            this.gameField_button1.Location = new System.Drawing.Point(14, 48);
+            this.gameField_button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gameField_button1.Name = "gameField_button1";
-            this.gameField_button1.Size = new System.Drawing.Size(80, 80);
+            this.gameField_button1.Size = new System.Drawing.Size(91, 107);
             this.gameField_button1.TabIndex = 1;
             this.gameField_button1.Text = "button1";
             this.gameField_button1.UseVisualStyleBackColor = true;
             // 
             // gameField_button2
             // 
-            this.gameField_button2.Location = new System.Drawing.Point(91, 36);
+            this.gameField_button2.Location = new System.Drawing.Point(104, 48);
+            this.gameField_button2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gameField_button2.Name = "gameField_button2";
-            this.gameField_button2.Size = new System.Drawing.Size(80, 80);
+            this.gameField_button2.Size = new System.Drawing.Size(91, 107);
             this.gameField_button2.TabIndex = 2;
             this.gameField_button2.Text = "button2";
             this.gameField_button2.UseVisualStyleBackColor = true;
             // 
             // gameField_button3
             // 
-            this.gameField_button3.Location = new System.Drawing.Point(170, 36);
+            this.gameField_button3.Location = new System.Drawing.Point(194, 48);
+            this.gameField_button3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gameField_button3.Name = "gameField_button3";
-            this.gameField_button3.Size = new System.Drawing.Size(80, 80);
+            this.gameField_button3.Size = new System.Drawing.Size(91, 107);
             this.gameField_button3.TabIndex = 3;
             this.gameField_button3.Text = "button3";
             this.gameField_button3.UseVisualStyleBackColor = true;
             // 
             // gameField_button4
             // 
-            this.gameField_button4.Location = new System.Drawing.Point(249, 36);
+            this.gameField_button4.Location = new System.Drawing.Point(285, 48);
+            this.gameField_button4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gameField_button4.Name = "gameField_button4";
-            this.gameField_button4.Size = new System.Drawing.Size(80, 80);
+            this.gameField_button4.Size = new System.Drawing.Size(91, 107);
             this.gameField_button4.TabIndex = 4;
             this.gameField_button4.Text = "button4";
             this.gameField_button4.UseVisualStyleBackColor = true;
             // 
             // gameField_button5
             // 
-            this.gameField_button5.Location = new System.Drawing.Point(12, 115);
+            this.gameField_button5.Location = new System.Drawing.Point(14, 153);
+            this.gameField_button5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gameField_button5.Name = "gameField_button5";
-            this.gameField_button5.Size = new System.Drawing.Size(80, 80);
+            this.gameField_button5.Size = new System.Drawing.Size(91, 107);
             this.gameField_button5.TabIndex = 5;
             this.gameField_button5.Text = "button5";
             this.gameField_button5.UseVisualStyleBackColor = true;
             // 
             // gameField_button6
             // 
-            this.gameField_button6.Location = new System.Drawing.Point(91, 115);
+            this.gameField_button6.Location = new System.Drawing.Point(104, 153);
+            this.gameField_button6.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gameField_button6.Name = "gameField_button6";
-            this.gameField_button6.Size = new System.Drawing.Size(80, 80);
+            this.gameField_button6.Size = new System.Drawing.Size(91, 107);
             this.gameField_button6.TabIndex = 6;
             this.gameField_button6.Text = "button6";
             this.gameField_button6.UseVisualStyleBackColor = true;
             // 
             // gameField_button7
             // 
-            this.gameField_button7.Location = new System.Drawing.Point(170, 115);
+            this.gameField_button7.Location = new System.Drawing.Point(194, 153);
+            this.gameField_button7.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gameField_button7.Name = "gameField_button7";
-            this.gameField_button7.Size = new System.Drawing.Size(80, 80);
+            this.gameField_button7.Size = new System.Drawing.Size(91, 107);
             this.gameField_button7.TabIndex = 7;
             this.gameField_button7.Text = "button7";
             this.gameField_button7.UseVisualStyleBackColor = true;
             // 
             // gameField_button8
             // 
-            this.gameField_button8.Location = new System.Drawing.Point(249, 115);
+            this.gameField_button8.Location = new System.Drawing.Point(285, 153);
+            this.gameField_button8.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gameField_button8.Name = "gameField_button8";
-            this.gameField_button8.Size = new System.Drawing.Size(80, 80);
+            this.gameField_button8.Size = new System.Drawing.Size(91, 107);
             this.gameField_button8.TabIndex = 8;
             this.gameField_button8.Text = "button8";
             this.gameField_button8.UseVisualStyleBackColor = true;
             // 
             // gameField_button9
             // 
-            this.gameField_button9.Location = new System.Drawing.Point(12, 194);
+            this.gameField_button9.Location = new System.Drawing.Point(14, 259);
+            this.gameField_button9.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gameField_button9.Name = "gameField_button9";
-            this.gameField_button9.Size = new System.Drawing.Size(80, 80);
+            this.gameField_button9.Size = new System.Drawing.Size(91, 107);
             this.gameField_button9.TabIndex = 9;
             this.gameField_button9.Text = "button9";
             this.gameField_button9.UseVisualStyleBackColor = true;
             // 
             // gameField_button10
             // 
-            this.gameField_button10.Location = new System.Drawing.Point(91, 194);
+            this.gameField_button10.Location = new System.Drawing.Point(104, 259);
+            this.gameField_button10.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gameField_button10.Name = "gameField_button10";
-            this.gameField_button10.Size = new System.Drawing.Size(80, 80);
+            this.gameField_button10.Size = new System.Drawing.Size(91, 107);
             this.gameField_button10.TabIndex = 10;
             this.gameField_button10.Text = "button10";
             this.gameField_button10.UseVisualStyleBackColor = true;
             // 
             // gameField_button11
             // 
-            this.gameField_button11.Location = new System.Drawing.Point(170, 194);
+            this.gameField_button11.Location = new System.Drawing.Point(194, 259);
+            this.gameField_button11.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gameField_button11.Name = "gameField_button11";
-            this.gameField_button11.Size = new System.Drawing.Size(80, 80);
+            this.gameField_button11.Size = new System.Drawing.Size(91, 107);
             this.gameField_button11.TabIndex = 11;
             this.gameField_button11.Text = "button11";
             this.gameField_button11.UseVisualStyleBackColor = true;
             // 
             // gameField_button12
             // 
-            this.gameField_button12.Location = new System.Drawing.Point(249, 194);
+            this.gameField_button12.Location = new System.Drawing.Point(285, 259);
+            this.gameField_button12.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gameField_button12.Name = "gameField_button12";
-            this.gameField_button12.Size = new System.Drawing.Size(80, 80);
+            this.gameField_button12.Size = new System.Drawing.Size(91, 107);
             this.gameField_button12.TabIndex = 12;
             this.gameField_button12.Text = "button12";
             this.gameField_button12.UseVisualStyleBackColor = true;
             // 
             // gameField_button13
             // 
-            this.gameField_button13.Location = new System.Drawing.Point(12, 273);
+            this.gameField_button13.Location = new System.Drawing.Point(14, 364);
+            this.gameField_button13.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gameField_button13.Name = "gameField_button13";
-            this.gameField_button13.Size = new System.Drawing.Size(80, 80);
+            this.gameField_button13.Size = new System.Drawing.Size(91, 107);
             this.gameField_button13.TabIndex = 13;
             this.gameField_button13.Text = "button13";
             this.gameField_button13.UseVisualStyleBackColor = true;
             // 
             // gameField_button14
             // 
-            this.gameField_button14.Location = new System.Drawing.Point(91, 273);
+            this.gameField_button14.Location = new System.Drawing.Point(104, 364);
+            this.gameField_button14.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gameField_button14.Name = "gameField_button14";
-            this.gameField_button14.Size = new System.Drawing.Size(80, 80);
+            this.gameField_button14.Size = new System.Drawing.Size(91, 107);
             this.gameField_button14.TabIndex = 14;
             this.gameField_button14.Text = "button14";
             this.gameField_button14.UseVisualStyleBackColor = true;
             // 
             // gameField_button15
             // 
-            this.gameField_button15.Location = new System.Drawing.Point(170, 273);
+            this.gameField_button15.Location = new System.Drawing.Point(194, 364);
+            this.gameField_button15.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gameField_button15.Name = "gameField_button15";
-            this.gameField_button15.Size = new System.Drawing.Size(80, 80);
+            this.gameField_button15.Size = new System.Drawing.Size(91, 107);
             this.gameField_button15.TabIndex = 15;
             this.gameField_button15.Text = "button15";
             this.gameField_button15.UseVisualStyleBackColor = true;
             // 
             // gameField_button16
             // 
-            this.gameField_button16.Location = new System.Drawing.Point(249, 273);
+            this.gameField_button16.Location = new System.Drawing.Point(285, 364);
+            this.gameField_button16.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gameField_button16.Name = "gameField_button16";
-            this.gameField_button16.Size = new System.Drawing.Size(80, 80);
+            this.gameField_button16.Size = new System.Drawing.Size(91, 107);
             this.gameField_button16.TabIndex = 16;
-            this.gameField_button16.Text = "button16";
             this.gameField_button16.UseVisualStyleBackColor = true;
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(12, 359);
+            this.progressBar1.Location = new System.Drawing.Point(14, 479);
+            this.progressBar1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(317, 23);
+            this.progressBar1.Size = new System.Drawing.Size(362, 31);
             this.progressBar1.TabIndex = 17;
             // 
             // timer1
@@ -257,9 +274,9 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(342, 392);
+            this.ClientSize = new System.Drawing.Size(391, 523);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.gameField_button16);
             this.Controls.Add(this.gameField_button15);
@@ -281,6 +298,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
