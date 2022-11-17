@@ -249,7 +249,7 @@ namespace task
                 SetCurrentArrIntoButtonsText(controlCollection);
             }
             // Check left square.
-            else if (userMove.X - 1 >= 0 && _arr[userMove.X, userMove.X - 1] == 0)
+            else if (userMove.Y - 1 >= 0 && _arr[userMove.X, userMove.Y - 1] == 0)
             {
                 // If an empty square is found here, change the user's move with an empty square.
                 (_arr[zeroPosition.X, zeroPosition.Y], _arr[userMove.X, userMove.Y]) =
