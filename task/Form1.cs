@@ -18,6 +18,12 @@ namespace task
     // Form constructor.
     public partial class Form1 : Form
     {
+        // The number of buttons in their places as a percentage.
+        public string ButtonsInTheirPlaces { get; set; }
+
+        // Counting the number of buttons in their places as a percentage.
+
+
         // Link to the class that implements the game logic.
         private readonly Game _game;
         public Form1()
