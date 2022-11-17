@@ -100,6 +100,7 @@ namespace task
     internal class Game
     {
         // Button name with an empty square.
+        public string EmptySquareNameButton { get; set; }
 
         // Array for storing button values.
         int[,] _arr =
