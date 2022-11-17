@@ -87,13 +87,17 @@ namespace task
         // Timer tick. 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            // Maybe timer not needed
+            // Maybe timer not needed.
 
         }
 
         // Click on the playing field.
-        private void gameField_button1_Click(object sender, EventArgs e)
+        private void gameField_buttons_Click(object sender, EventArgs e)
         {
+            // Converting the pressed button to the corresponding array coordinates.
+            _game.OneStepInTheGame((Button)sender);
+            // Display the updated array coordinates on the playing field after the player's turn.
+
 
         }
     }
@@ -196,9 +200,108 @@ namespace task
                 return;
         }
 
+        // One step in the game.
+        public void OneStepInTheGame(Button button)
+        {
+            // Get empty square coordinates.
+            Point zeroPosition = GetEmptySquareCoordinates();
+            // Get user move coordinates.
+            Point userMove = ConvertButtonToCoordinates(button);
 
 
 
+        }
 
+        // Converts the pressed button on the playfield to the corresponding array coordinates.
+        public Point ConvertButtonToCoordinates(Button button)
+        {
+            var coordinates = new Point();
+            if (button.Name == "gameField_button1")
+            {
+                coordinates.X = 0;
+                coordinates.Y = 0;
+            }
+            else if (button.Name == "gameField_button2")
+            {
+                coordinates.X = 0;
+                coordinates.Y = 1;
+            }
+            else if (button.Name == "gameField_button3")
+            {
+                coordinates.X = 0;
+                coordinates.Y = 2;
+            }
+            else if (button.Name == "gameField_button4")
+            {
+                coordinates.X = 0;
+                coordinates.Y = 3;
+            }
+            else if (button.Name == "gameField_button5")
+            {
+                coordinates.X = 1;
+                coordinates.Y = 0;
+            }
+            else if (button.Name == "gameField_button6")
+            {
+                coordinates.X = 1;
+                coordinates.Y = 1;
+            }
+            else if (button.Name == "gameField_button7")
+            {
+                coordinates.X = 1;
+                coordinates.Y = 2;
+            }
+            else if (button.Name == "gameField_button8")
+            {
+                coordinates.X = 1;
+                coordinates.Y = 3;
+            }
+            else if (button.Name == "gameField_button9")
+            {
+                coordinates.X = 2;
+                coordinates.Y = 0;
+            }
+            else if (button.Name == "gameField_button10")
+            {
+                coordinates.X = 2;
+                coordinates.Y = 1;
+            }
+            else if (button.Name == "gameField_button11")
+            {
+                coordinates.X = 2;
+                coordinates.Y = 2;
+            }
+            else if (button.Name == "gameField_button12")
+            {
+                coordinates.X = 2;
+                coordinates.Y = 3;
+            }
+            else if (button.Name == "gameField_button13")
+            {
+                coordinates.X = 3;
+                coordinates.Y = 0;
+            }
+            else if (button.Name == "gameField_button14")
+            {
+                coordinates.X = 3;
+                coordinates.Y = 1;
+            }
+            else if (button.Name == "gameField_button15")
+            {
+                coordinates.X = 3;
+                coordinates.Y = 2;
+            }
+            else if (button.Name == "gameField_button16")
+            {
+                coordinates.X = 3;
+                coordinates.Y = 3;
+            }
+            return coordinates;
+        }
+        //    0  1  2  3
+        // 0  1  2  3  4
+        // 1  5  6  7  8
+        // 2  9  10 11 12
+        // 3  13 14 15 0
     }
 }
