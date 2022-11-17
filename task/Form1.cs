@@ -74,10 +74,11 @@ namespace task
             _game.SetCurrentArrIntoButtonsText(Controls);
 
             // The number of buttons in their places as a percentage.
-            _game.ButtonsInTheirPlacesasPercentage = _game.CountingButtonsInTheirPlacesasPercentage();
+            //_game.ButtonsInTheirPlacesasPercentage = _game.CountingButtonsInTheirPlacesasPercentage();
+            _game.CountingButtonsInTheirPlacesasPercentage(Controls);
 
             // Display on the progress bar the number of buttons in their places as a percentage.
-            progressBar1.Value = _game.ButtonsInTheirPlacesasPercentage;
+            //progressBar1.Value = (int)_game.ButtonsInTheirPlacesasPercentage;
 
             // Game start time.
             _game.GameStartTime = DateTime.Now;
@@ -113,22 +114,47 @@ namespace task
     internal class Game
     {
         // The number of buttons in their places as a percentage.
-        public int ButtonsInTheirPlacesasPercentage { get; set; }
+        public double ButtonsInTheirPlacesasPercentage { get; set; }
 
         // Counting the number of buttons in their places as a percentage.
-        public int CountingButtonsInTheirPlacesasPercentage()
+        public void CountingButtonsInTheirPlacesasPercentage(Control.ControlCollection controlCollection)
         {
             int count = 0;
             for (int i = 0; i < 4; i++)
             {
                 for (int j = 0; j < 4; j++)
                 {
-                    if (
-                        _arr[0, 0] == 1 || _arr[0, 1] == 2 || _arr[0, 2] == 3 || _arr[0, 3] == 4 ||
-                        _arr[1, 0] == 5 || _arr[1, 1] == 6 || _arr[1, 2] == 7 || _arr[1, 3] == 8 ||
-                        _arr[2, 0] == 9 || _arr[2, 1] == 10 || _arr[2, 2] == 11 || _arr[2, 3] == 12 ||
-                        _arr[3, 0] == 13 || _arr[3, 1] == 14 || _arr[3, 2] == 15 || _arr[3, 3] == 0
-                    )
+                    if (i == 0 && j == 0 && _arr[0, 0] == 1)
+                        count++;
+                    if (i == 0 && j == 1 && _arr[0, 1] == 2)
+                        count++;
+                    if (i == 0 && j == 2 && _arr[0, 2] == 3)
+                        count++;
+                    if (i == 0 && j == 3 && _arr[0, 3] == 4)
+                        count++;
+                    if (i == 1 && j == 0 && _arr[1, 0] == 5)
+                        count++;
+                    if (i == 1 && j == 1 && _arr[1, 1] == 6)
+                        count++;
+                    if (i == 1 && j == 2 && _arr[1, 2] == 7)
+                        count++;
+                    if (i == 1 && j == 3 && _arr[1, 3] == 8)
+                        count++;
+                    if (i == 2 && j == 0 && _arr[2, 0] == 9)
+                        count++;
+                    if (i == 2 && j == 1 && _arr[2, 1] == 10)
+                        count++;
+                    if (i == 2 && j == 2 && _arr[2, 2] == 11)
+                        count++;
+                    if (i == 2 && j == 3 && _arr[2, 3] == 12)
+                        count++;
+                    if (i == 3 && j == 0 && _arr[3, 0] == 13)
+                        count++;
+                    if (i == 3 && j == 1 && _arr[3, 1] == 14)
+                        count++;
+                    if (i == 3 && j == 2 && _arr[3, 2] == 15)
+                        count++;
+                    if (i == 3 && j == 3 && _arr[3, 3] == 0)
                         count++;
                     //    0  1  2  3
                     // 0  1  2  3  4
@@ -138,7 +164,16 @@ namespace task
                 }
             }
 
-            return count * 6.5;
+            foreach (Control control in controlCollection)
+            {
+                if (control is ProgressBar && ((ProgressBar)control).Name == "progressBar1")
+                {
+                    ((ProgressBar)control).Value = (int)(count * 6.5);
+                }
+            }
+
+            //Control[] ar = form.Controls.Find("progressBar1", false);
+            //((ProgressBar)ar[0]).Value = (int)(count * 6.5);
         }
 
         // Get ControlCollection controlCollection;
@@ -189,7 +224,6 @@ namespace task
             int k = 1;
             for (int i = 0; i < 4; i++)
             {
-
                 for (int j = 0; j < 4; j++)
                 {
                     foreach (Control control in controlCollection)
@@ -299,7 +333,7 @@ namespace task
             // Just else ...
             //else
             //    return;
-            ButtonsInTheirPlacesasPercentage = CountingButtonsInTheirPlacesasPercentage();
+            CountingButtonsInTheirPlacesasPercentage(controlCollection);
         }
 
         // Converts the pressed button on the playfield to the corresponding array coordinates.
