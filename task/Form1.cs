@@ -18,12 +18,6 @@ namespace task
     // Form constructor.
     public partial class Form1 : Form
     {
-        // The number of buttons in their places as a percentage.
-        public string ButtonsInTheirPlaces { get; set; }
-
-        // Counting the number of buttons in their places as a percentage.
-
-
         // Link to the class that implements the game logic.
         private readonly Game _game;
         public Form1()
@@ -112,8 +106,33 @@ namespace task
     // The class that implements the logic of the game.
     internal class Game
     {
+        // The number of buttons in their places as a percentage.
+        public string ButtonsInTheirPlaces { get; set; }
+
+        // Counting the number of buttons in their places as a percentage.
+        void CountingButtonsInTheirPlaces()
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    if (
+                        _arr[0, 0] == 1 || _arr[0, 1] == 2 || _arr[0, 2] == 3 || _arr[0, 3] == 3 ||
+                        _arr[1, 0] == 1 || _arr[1, 1] == 2 || _arr[1, 2] == 3 || _arr[1, 3] == 3 ||
+                        _arr[2, 0] == 1 || _arr[2, 1] == 2 || _arr[2, 2] == 3 || _arr[2, 3] == 3 ||
+                        _arr[3, 0] == 1 || _arr[3, 1] == 2 || _arr[3, 2] == 3 || _arr[3, 3] == 3
+                    )
+                    //    0  1  2  3
+                    // 0  1  2  3  4
+                    // 1  5  6  7  8
+                    // 2  9  10 11 12
+                    // 3  13 14 15 0
+                }
+            }
+        }
+
         // Get ControlCollection controlCollection;
-        public Control.ControlCollection ControlCollection { get; set; }
+        //public Control.ControlCollection ControlCollection { get; set; }
 
         // Time spent playing.
         public DateTime GameStartTime { get; set; }
