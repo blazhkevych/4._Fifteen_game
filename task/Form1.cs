@@ -1,4 +1,5 @@
 using System.Drawing;
+using System.Xml.Linq;
 
 namespace task
 {
@@ -107,6 +108,13 @@ namespace task
         {
             // One step in the game.
             _game.OneStepInTheGame((Button)sender, Controls);
+
+            // Check for victory.
+            //_game.GameStopTime = DateTime.Now;
+            //MessageBox.Show("Congratulations! You have done the impossible! You won !" +
+            //                $"\nTo win you spent {(_game.GameStopTime - _game.GameStartTime).ToString("hh\\:mm\\:ss")}", "Game \"Fifteen\".", MessageBoxButtons.OK,
+            //    MessageBoxIcon.Information);
+
         }
     }
 
@@ -172,6 +180,15 @@ namespace task
                 }
             }
 
+            if (count == 16)
+            {
+                GameStopTime = DateTime.Now;
+                MessageBox.Show("Congratulations! You have done the impossible! You won !" +
+                $"\nTo win you spent {(GameStopTime - GameStartTime).ToString("hh\\:mm\\:ss")}", "Game \"Fifteen\".", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                AskPlayMore();
+            }
+
             //Control[] ar = form.Controls.Find("progressBar1", false);
             //((ProgressBar)ar[0]).Value = (int)(count * 6.5);
         }
@@ -179,8 +196,11 @@ namespace task
         // Get ControlCollection controlCollection;
         //public Control.ControlCollection ControlCollection { get; set; }
 
-        // Time spent playing.
+        // Game start time.
         public DateTime GameStartTime { get; set; }
+
+        // Game stop time.
+        public DateTime GameStopTime { get; set; }
 
         // Button name with an empty square.
         public string EmptySquareNameButton { get; set; }
@@ -193,6 +213,17 @@ namespace task
             {9, 10, 11, 12},
             {13, 14, 15, 0}
         };
+
+        // Do you want to play again?.
+        public void AskPlayMore()
+        {
+            var result = MessageBox.Show("Do you want to play again ?", "Game \"Fifteen\".", MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+            if (result == DialogResult.No)
+                Application.Exit();
+            else if (result == DialogResult.Yes)
+                Application.Restart();
+        }
 
         // Shuffle array.
         public void ShuffleArray()
