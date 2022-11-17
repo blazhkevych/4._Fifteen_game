@@ -112,16 +112,18 @@ namespace task
         // Counting the number of buttons in their places as a percentage.
         void CountingButtonsInTheirPlaces()
         {
+            int count = 0;
             for (int i = 0; i < 4; i++)
             {
                 for (int j = 0; j < 4; j++)
                 {
                     if (
-                        _arr[0, 0] == 1 || _arr[0, 1] == 2 || _arr[0, 2] == 3 || _arr[0, 3] == 3 ||
-                        _arr[1, 0] == 1 || _arr[1, 1] == 2 || _arr[1, 2] == 3 || _arr[1, 3] == 3 ||
-                        _arr[2, 0] == 1 || _arr[2, 1] == 2 || _arr[2, 2] == 3 || _arr[2, 3] == 3 ||
-                        _arr[3, 0] == 1 || _arr[3, 1] == 2 || _arr[3, 2] == 3 || _arr[3, 3] == 3
+                        _arr[0, 0] == 1 || _arr[0, 1] == 2 || _arr[0, 2] == 3 || _arr[0, 3] == 4 ||
+                        _arr[1, 0] == 5 || _arr[1, 1] == 6 || _arr[1, 2] == 7 || _arr[1, 3] == 8 ||
+                        _arr[2, 0] == 9 || _arr[2, 1] == 10 || _arr[2, 2] == 11 || _arr[2, 3] == 12 ||
+                        _arr[3, 0] == 13 || _arr[3, 1] == 14 || _arr[3, 2] == 15 || _arr[3, 3] == 0
                     )
+                        count++;
                     //    0  1  2  3
                     // 0  1  2  3  4
                     // 1  5  6  7  8
@@ -129,6 +131,8 @@ namespace task
                     // 3  13 14 15 0
                 }
             }
+
+            ButtonsInTheirPlaces = (count * 6.5) + " % in their places.";
         }
 
         // Get ControlCollection controlCollection;
