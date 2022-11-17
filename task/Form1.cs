@@ -200,6 +200,12 @@ namespace task
                 return;
         }
 
+        // Check if there is an empty square nearby.
+        //Point IsAnEmptySquareNearby(Point userMove)
+        //{
+
+        //}
+
         // One step in the game.
         public void OneStepInTheGame(Button button)
         {
@@ -207,7 +213,24 @@ namespace task
             Point zeroPosition = GetEmptySquareCoordinates();
             // Get user move coordinates.
             Point userMove = ConvertButtonToCoordinates(button);
+            // Check if there is an empty square nearby.
+            //IsAnEmptySquareNearby(userMove);
 
+            // Let the battles begin!
+
+
+            // my move - 1, 1
+            // square to check is
+            //      0, 1
+            // 1,0  >>1,1<<    1, 2 
+            //      2, 1
+
+            // Check the top square.
+            if (userMove.X - 1 == 0 && userMove.X - 1 >= 0)
+            {
+                // If an empty square is found here, change the user's move with an empty square.
+                (zeroPosition, userMove) = (userMove, zeroPosition); // Tuples which enables swapping two variables without a temporary one;
+            }
 
 
         }
