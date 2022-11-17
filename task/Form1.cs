@@ -81,6 +81,7 @@ namespace task
         // Menu item "Exit".
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Do you really want to leave ?.
             _game.ReallyWantToLeave();
         }
 
@@ -97,11 +98,8 @@ namespace task
         // Click on the playing field.
         private void gameField_buttons_Click(object sender, EventArgs e)
         {
-            // Converting the pressed button to the corresponding array coordinates.
+            // One step in the game.
             _game.OneStepInTheGame((Button)sender, Controls);
-            // Display the updated array coordinates on the playing field after the player's turn.
-
-
         }
     }
 
@@ -198,7 +196,7 @@ namespace task
         // Do you really want to leave ?.
         public void ReallyWantToLeave()
         {
-            var result = MessageBox.Show("Вы действительно хотите выйти ?", "Игра \"Пятнашки\".", MessageBoxButtons.YesNo,
+            var result = MessageBox.Show("Do you really want to leave ?", "Game \"Fifteen\".", MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
                 Application.Exit();
@@ -219,8 +217,6 @@ namespace task
             Point zeroPosition = GetEmptySquareCoordinates();
             // Get user move coordinates.
             Point userMove = ConvertButtonToCoordinates(button);
-            // Check if there is an empty square nearby.
-            //IsAnEmptySquareNearby(userMove);
 
             // Let the battle begin!
 
