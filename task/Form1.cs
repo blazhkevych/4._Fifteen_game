@@ -99,6 +99,8 @@ namespace task
     // The class that implements the logic of the game.
     internal class Game
     {
+        // Button name with an empty square.
+
         // Array for storing button values.
         int[,] _arr =
         {
