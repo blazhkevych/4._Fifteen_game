@@ -21,11 +21,10 @@ namespace task
     {
         // Link to the class that implements the game logic.
         private readonly Game _game;
-        public Form1()
-        {
-            InitializeComponent();
 
-            // Turn off the playing field before starting the game.
+        // Turn off the playing field before starting the game.
+        void TurnOffThePlayingFields()
+        {
             // Will be enabled only after clicking the "Start game" button.
             gameField_button1.Enabled = false;
             gameField_button2.Enabled = false;
@@ -43,14 +42,11 @@ namespace task
             gameField_button14.Enabled = false;
             gameField_button15.Enabled = false;
             gameField_button16.Enabled = false;
-
-            _game = new Game();
         }
 
-        // Menu item "New game".
-        private void NewGameToolStripMenuItem_Click(object sender, EventArgs e)
+        // Turn on the playing field before starting the game.
+        void TurnOnThePlayingFields()
         {
-            // Turn on the playing field.
             gameField_button1.Enabled = true;
             gameField_button2.Enabled = true;
             gameField_button3.Enabled = true;
@@ -67,6 +63,23 @@ namespace task
             gameField_button14.Enabled = true;
             gameField_button15.Enabled = true;
             gameField_button16.Enabled = true;
+        }
+
+        public Form1()
+        {
+            InitializeComponent();
+
+            // Turn off the playing field before starting the game.
+            TurnOffThePlayingFields();
+
+            _game = new Game();
+        }
+
+        // Menu item "New game".
+        private void NewGameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Turn on the playing field before starting the game.
+            TurnOnThePlayingFields();
 
             // Shuffle array.
             _game.ShuffleArray();
@@ -78,12 +91,8 @@ namespace task
             //_game.ButtonsInTheirPlacesasPercentage = _game.CountingButtonsInTheirPlacesasPercentage();
             _game.CountingButtonsInTheirPlacesasPercentage(Controls);
 
-            // Display on the progress bar the number of buttons in their places as a percentage.
-            //progressBar1.Value = (int)_game.ButtonsInTheirPlacesasPercentage;
-
             // Game start time.
             _game.GameStartTime = DateTime.Now;
-
         }
 
         // Menu item "Exit".
@@ -93,37 +102,17 @@ namespace task
             _game.ReallyWantToLeave();
         }
 
-        // Timer tick. 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            // Maybe timer not needed.
-
-        }
-
-        // Get ControlCollection controlCollection.
-        //public TYPE Type { get; set; }
-
         // Click on the playing field.
         private void gameField_buttons_Click(object sender, EventArgs e)
         {
             // One step in the game.
             _game.OneStepInTheGame((Button)sender, Controls);
-
-            // Check for victory.
-            //_game.GameStopTime = DateTime.Now;
-            //MessageBox.Show("Congratulations! You have done the impossible! You won !" +
-            //                $"\nTo win you spent {(_game.GameStopTime - _game.GameStartTime).ToString("hh\\:mm\\:ss")}", "Game \"Fifteen\".", MessageBoxButtons.OK,
-            //    MessageBoxIcon.Information);
-
         }
     }
 
     // The class that implements the logic of the game.
     internal class Game
     {
-        // The number of buttons in their places as a percentage.
-        public double ButtonsInTheirPlacesasPercentage { get; set; }
-
         // Counting the number of buttons in their places as a percentage.
         public void CountingButtonsInTheirPlacesasPercentage(Control.ControlCollection controlCollection)
         {
@@ -188,22 +177,13 @@ namespace task
                     MessageBoxIcon.Information);
                 AskPlayMore();
             }
-
-            //Control[] ar = form.Controls.Find("progressBar1", false);
-            //((ProgressBar)ar[0]).Value = (int)(count * 6.5);
         }
-
-        // Get ControlCollection controlCollection;
-        //public Control.ControlCollection ControlCollection { get; set; }
 
         // Game start time.
         public DateTime GameStartTime { get; set; }
 
         // Game stop time.
         public DateTime GameStopTime { get; set; }
-
-        // Button name with an empty square.
-        public string EmptySquareNameButton { get; set; }
 
         // Array for storing button values.
         int[,] _arr =
@@ -304,12 +284,6 @@ namespace task
                 return;
         }
 
-        // Check if there is an empty square nearby.
-        //Point IsAnEmptySquareNearby(Point userMove)
-        //{
-
-        //}
-
         // One step in the game.
         public void OneStepInTheGame(Button button, Control.ControlCollection controlCollection)
         {
@@ -317,14 +291,6 @@ namespace task
             Point zeroPosition = GetEmptySquareCoordinates();
             // Get user move coordinates.
             Point userMove = ConvertButtonToCoordinates(button);
-
-            // Let the battle begin!
-
-            // if my move is - 1,1
-            // square to check is:
-            //        0,1
-            // 1,0  >>1,1<<  1,2 
-            //        2,1
 
             // Check the top square.
             if (userMove.X - 1 >= 0 && _arr[userMove.X - 1, userMove.Y] == 0)
@@ -361,9 +327,7 @@ namespace task
                 // Displaying the playing field on the buttons.
                 SetCurrentArrIntoButtonsText(controlCollection);
             }
-            // Just else ...
-            //else
-            //    return;
+
             CountingButtonsInTheirPlacesasPercentage(controlCollection);
         }
 

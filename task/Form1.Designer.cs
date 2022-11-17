@@ -52,7 +52,6 @@
             this.gameField_button15 = new System.Windows.Forms.Button();
             this.gameField_button16 = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -268,11 +267,6 @@
             this.progressBar1.Size = new System.Drawing.Size(362, 31);
             this.progressBar1.TabIndex = 17;
             // 
-            // timer1
-            // 
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -335,6 +329,5 @@
         private Button gameField_button15;
         private Button gameField_button16;
         private ProgressBar progressBar1;
-        private System.Windows.Forms.Timer timer1;
     }
 }
