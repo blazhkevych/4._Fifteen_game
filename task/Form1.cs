@@ -69,23 +69,25 @@ namespace task
 
             // Shuffle array.
             _game.ShuffleArray();
+
             // Displaying the playing field on the buttons.
             _game.SetCurrentArrIntoButtonsText(Controls);
 
-            // todo: пересмотреть сортировку и писать дальше.
+            // Game start time.
+            _game.GameStartTime = DateTime.Now;
 
         }
 
         // Menu item "Exit".
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Close();
+            _game.ReallyWantToLeave();
         }
 
         // Timer tick. 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            // Output in the title of the time spent on the passage of the game.
+            // Maybe timer not needed
 
         }
 
@@ -99,6 +101,9 @@ namespace task
     // The class that implements the logic of the game.
     internal class Game
     {
+        // Time spent playing.
+        public DateTime GameStartTime { get; set; }
+
         // Button name with an empty square.
         public string EmptySquareNameButton { get; set; }
 
@@ -178,6 +183,17 @@ namespace task
             }
 
             return p;
+        }
+
+        // Do you really want to leave ?.
+        public void ReallyWantToLeave()
+        {
+            var result = MessageBox.Show("Вы действительно хотите выйти ?", "Игра \"Пятнашки\".", MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+                Application.Exit();
+            else
+                return;
         }
 
 
