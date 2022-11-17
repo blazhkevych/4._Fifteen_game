@@ -74,10 +74,10 @@ namespace task
             _game.SetCurrentArrIntoButtonsText(Controls);
 
             // The number of buttons in their places as a percentage.
-            _game.ButtonsInTheirPlaces = _game.CountingButtonsInTheirPlaces();
+            _game.ButtonsInTheirPlacesasPercentage = _game.CountingButtonsInTheirPlacesasPercentage();
 
             // Display on the progress bar the number of buttons in their places as a percentage.
-            progressBar1.Value = _game.ButtonsInTheirPlaces;
+            progressBar1.Value = _game.ButtonsInTheirPlacesasPercentage;
 
             // Game start time.
             _game.GameStartTime = DateTime.Now;
@@ -113,10 +113,10 @@ namespace task
     internal class Game
     {
         // The number of buttons in their places as a percentage.
-        public int ButtonsInTheirPlaces { get; set; }
+        public int ButtonsInTheirPlacesasPercentage { get; set; }
 
         // Counting the number of buttons in their places as a percentage.
-        public int CountingButtonsInTheirPlaces()
+        public int CountingButtonsInTheirPlacesasPercentage()
         {
             int count = 0;
             for (int i = 0; i < 4; i++)
@@ -299,7 +299,7 @@ namespace task
             // Just else ...
             //else
             //    return;
-            ButtonsInTheirPlaces = CountingButtonsInTheirPlaces();
+            ButtonsInTheirPlacesasPercentage = CountingButtonsInTheirPlacesasPercentage();
         }
 
         // Converts the pressed button on the playfield to the corresponding array coordinates.
