@@ -1,426 +1,481 @@
-using System.Drawing;
-using System.Xml.Linq;
+namespace task;
 
-namespace task
+/// <summary>
+///     Ќаписать игру Ђѕ€тнашкиї, учитыва€ следующие требовани€:
+///     Х предусмотреть автоматическую перестановку Ђп€тнашекї в начале
+///     новой игры;
+///     Х выводить врем€, за которое пользователь окончил игру (собрал
+///     Ђп€тнашкиї);
+///     Х предусмотреть индикатор процесса, который будет отображать
+///     процесс собирани€ Ђп€тнашекї, т.е. отображать, какое количество
+///     кнопок в процентном отношении находитс€ на своих местах;
+///     Х предусмотреть возможность начать новую игру.
+/// </summary>
+
+// Form constructor.
+public partial class Form1 : Form
 {
-    /// <summary>
-    /// Ќаписать игру Ђѕ€тнашкиї, учитыва€ следующие требовани€: 
-    /// Х предусмотреть автоматическую перестановку Ђп€тнашекї в начале 
-    /// новой игры; 
-    /// Х выводить врем€, за которое пользователь окончил игру (собрал 
-    /// Ђп€тнашкиї); 
-    /// Х предусмотреть индикатор процесса, который будет отображать 
-    /// процесс собирани€ Ђп€тнашекї, т.е. отображать, какое количество 
-    /// кнопок в процентном отношении находитс€ на своих местах;
-    /// Х предусмотреть возможность начать новую игру.
-    /// </summary>
+    // Link to the class that implements the game logic.
+    private readonly Game _game;
 
-
-    // Form constructor.
-    public partial class Form1 : Form
+    public Form1()
     {
-        // Link to the class that implements the game logic.
-        private readonly Game _game;
+        InitializeComponent();
 
         // Turn off the playing field before starting the game.
-        void TurnOffThePlayingFields()
-        {
-            // Will be enabled only after clicking the "Start game" button.
-            gameField_button1.Enabled = false;
-            gameField_button2.Enabled = false;
-            gameField_button3.Enabled = false;
-            gameField_button4.Enabled = false;
-            gameField_button5.Enabled = false;
-            gameField_button6.Enabled = false;
-            gameField_button7.Enabled = false;
-            gameField_button8.Enabled = false;
-            gameField_button9.Enabled = false;
-            gameField_button10.Enabled = false;
-            gameField_button11.Enabled = false;
-            gameField_button12.Enabled = false;
-            gameField_button13.Enabled = false;
-            gameField_button14.Enabled = false;
-            gameField_button15.Enabled = false;
-            gameField_button16.Enabled = false;
-        }
+        TurnOffThePlayingFields();
 
-        // Turn on the playing field before starting the game.
-        void TurnOnThePlayingFields()
-        {
-            gameField_button1.Enabled = true;
-            gameField_button2.Enabled = true;
-            gameField_button3.Enabled = true;
-            gameField_button4.Enabled = true;
-            gameField_button5.Enabled = true;
-            gameField_button6.Enabled = true;
-            gameField_button7.Enabled = true;
-            gameField_button8.Enabled = true;
-            gameField_button9.Enabled = true;
-            gameField_button10.Enabled = true;
-            gameField_button11.Enabled = true;
-            gameField_button12.Enabled = true;
-            gameField_button13.Enabled = true;
-            gameField_button14.Enabled = true;
-            gameField_button15.Enabled = true;
-            gameField_button16.Enabled = true;
-        }
-
-        public Form1()
-        {
-            InitializeComponent();
-
-            // Turn off the playing field before starting the game.
-            TurnOffThePlayingFields();
-
-            _game = new Game();
-        }
-
-        // Menu item "New game".
-        private void NewGameToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            // Turn on the playing field before starting the game.
-            TurnOnThePlayingFields();
-
-            // Shuffle array.
-            _game.ShuffleArray();
-
-            // Displaying the playing field on the buttons.
-            _game.SetCurrentArrIntoButtonsText(Controls);
-
-            // The number of buttons in their places as a percentage.
-            //_game.ButtonsInTheirPlacesasPercentage = _game.CountingButtonsInTheirPlacesasPercentage();
-            _game.CountingButtonsInTheirPlacesasPercentage(Controls);
-
-            // Game start time.
-            _game.GameStartTime = DateTime.Now;
-        }
-
-        // Menu item "Exit".
-        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            // Do you really want to leave ?.
-            _game.ReallyWantToLeave();
-        }
-
-        // Click on the playing field.
-        private void gameField_buttons_Click(object sender, EventArgs e)
-        {
-            // One step in the game.
-            _game.OneStepInTheGame((Button)sender, Controls);
-        }
+        _game = new Game();
     }
 
-    // The class that implements the logic of the game.
-    internal class Game
+    // Turn off the playing field before starting the game.
+    private void TurnOffThePlayingFields()
     {
-        // Counting the number of buttons in their places as a percentage.
-        public void CountingButtonsInTheirPlacesasPercentage(Control.ControlCollection controlCollection)
-        {
-            int count = 0;
-            for (int i = 0; i < 4; i++)
-            {
-                for (int j = 0; j < 4; j++)
-                {
-                    if (i == 0 && j == 0 && _arr[0, 0] == 1)
-                        count++;
-                    if (i == 0 && j == 1 && _arr[0, 1] == 2)
-                        count++;
-                    if (i == 0 && j == 2 && _arr[0, 2] == 3)
-                        count++;
-                    if (i == 0 && j == 3 && _arr[0, 3] == 4)
-                        count++;
-                    if (i == 1 && j == 0 && _arr[1, 0] == 5)
-                        count++;
-                    if (i == 1 && j == 1 && _arr[1, 1] == 6)
-                        count++;
-                    if (i == 1 && j == 2 && _arr[1, 2] == 7)
-                        count++;
-                    if (i == 1 && j == 3 && _arr[1, 3] == 8)
-                        count++;
-                    if (i == 2 && j == 0 && _arr[2, 0] == 9)
-                        count++;
-                    if (i == 2 && j == 1 && _arr[2, 1] == 10)
-                        count++;
-                    if (i == 2 && j == 2 && _arr[2, 2] == 11)
-                        count++;
-                    if (i == 2 && j == 3 && _arr[2, 3] == 12)
-                        count++;
-                    if (i == 3 && j == 0 && _arr[3, 0] == 13)
-                        count++;
-                    if (i == 3 && j == 1 && _arr[3, 1] == 14)
-                        count++;
-                    if (i == 3 && j == 2 && _arr[3, 2] == 15)
-                        count++;
-                    if (i == 3 && j == 3 && _arr[3, 3] == 0)
-                        count++;
-                    //    0  1  2  3
-                    // 0  1  2  3  4
-                    // 1  5  6  7  8
-                    // 2  9  10 11 12
-                    // 3  13 14 15 0
-                }
-            }
+        // Will be enabled only after clicking the "Start game" button.
+        gameField_button1.Enabled = false;
+        gameField_button2.Enabled = false;
+        gameField_button3.Enabled = false;
+        gameField_button4.Enabled = false;
+        gameField_button5.Enabled = false;
+        gameField_button6.Enabled = false;
+        gameField_button7.Enabled = false;
+        gameField_button8.Enabled = false;
+        gameField_button9.Enabled = false;
+        gameField_button10.Enabled = false;
+        gameField_button11.Enabled = false;
+        gameField_button12.Enabled = false;
+        gameField_button13.Enabled = false;
+        gameField_button14.Enabled = false;
+        gameField_button15.Enabled = false;
+        gameField_button16.Enabled = false;
+    }
 
-            foreach (Control control in controlCollection)
-            {
-                if (control is ProgressBar && ((ProgressBar)control).Name == "progressBar1")
-                {
-                    ((ProgressBar)control).Value = (int)(count * 6.5);
-                }
-            }
+    // Turn on the playing field before starting the game.
+    private void TurnOnThePlayingFields()
+    {
+        gameField_button1.Enabled = true;
+        gameField_button2.Enabled = true;
+        gameField_button3.Enabled = true;
+        gameField_button4.Enabled = true;
+        gameField_button5.Enabled = true;
+        gameField_button6.Enabled = true;
+        gameField_button7.Enabled = true;
+        gameField_button8.Enabled = true;
+        gameField_button9.Enabled = true;
+        gameField_button10.Enabled = true;
+        gameField_button11.Enabled = true;
+        gameField_button12.Enabled = true;
+        gameField_button13.Enabled = true;
+        gameField_button14.Enabled = true;
+        gameField_button15.Enabled = true;
+        gameField_button16.Enabled = true;
+    }
 
-            if (count == 16)
-            {
-                GameStopTime = DateTime.Now;
-                MessageBox.Show("Congratulations! You have done the impossible! You won !" +
-                $"\nTo win you spent {(GameStopTime - GameStartTime).ToString("hh\\:mm\\:ss")}", "Game \"Fifteen\".", MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-                AskPlayMore();
-            }
-        }
-
-        // Game start time.
-        public DateTime GameStartTime { get; set; }
-
-        // Game stop time.
-        public DateTime GameStopTime { get; set; }
-
-        // Array for storing button values.
-        int[,] _arr =
-        {
-            {1, 2, 3, 4},
-            { 5, 6, 7, 8},
-            {9, 10, 11, 12},
-            {13, 14, 15, 0}
-        };
-
-        // Do you want to play again?.
-        public void AskPlayMore()
-        {
-            var result = MessageBox.Show("Do you want to play again ?", "Game \"Fifteen\".", MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-            if (result == DialogResult.No)
-                Application.Exit();
-            else if (result == DialogResult.Yes)
-                Application.Restart();
-        }
+    // Menu item "New game".
+    private void NewGameToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        // Turn on the playing field before starting the game.
+        TurnOnThePlayingFields();
 
         // Shuffle array.
-        public void ShuffleArray()
-        {
-            Random r = new Random();
-
-            int row = 0, col = 0;
-            int n = 3;
-            while (n > 0)
-            {
-                for (int i = 0; i < 4; i++)
-                {
-                    for (int j = 0; j < 4; j++)
-                    {
-                        row = r.Next(0, 4);
-                        col = r.Next(0, 4);
-                        int temp = _arr[i, j];
-                        _arr[i, j] = _arr[row, col];
-                        _arr[row, col] = temp;
-                    }
-                }
-                n--;
-            }
-        }
+        _game.ShuffleArray();
 
         // Displaying the playing field on the buttons.
-        public void SetCurrentArrIntoButtonsText(Control.ControlCollection controlCollection)
-        {
-            int k = 1;
-            for (int i = 0; i < 4; i++)
-            {
-                for (int j = 0; j < 4; j++)
-                {
-                    foreach (Control control in controlCollection)
-                    {
-                        if (control is Button && ((Button)control).Name == "gameField_button" + k)
-                        {
-                            if (_arr[i, j] == 0)
-                                ((Button)control).Text = "";
-                            else
-                                ((Button)control).Text = _arr[i, j].ToString();
-                            k++;
-                        }
-                    }
-                }
-            }
-        }
+        _game.SetCurrentArrIntoButtonsText(Controls);
 
-        // Returns the coordinates of the empty square.
-        public Point GetEmptySquareCoordinates()
-        {
-            // Find the coordinates of the empty button.
-            Point p = new Point();
+        // The number of buttons in their places as a percentage.
+        //_game.ButtonsInTheirPlacesasPercentage = _game.CountingButtonsInTheirPlacesasPercentage();
+        _game.CountingButtonsInTheirPlacesasPercentage(Controls);
 
-            for (int i = 0; i < 4; i++)
-            {
-                for (int j = 0; j < 4; j++)
-                {
-                    if (_arr[i, j] == 0)
-                    {
-                        p.X = i;
-                        p.Y = j;
-                    }
-                }
-            }
-
-            return p;
-        }
-
-        // Do you really want to leave ?.
-        public void ReallyWantToLeave()
-        {
-            var result = MessageBox.Show("Do you really want to leave ?", "Game \"Fifteen\".", MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
-                Application.Exit();
-            else
-                return;
-        }
-
-        // One step in the game.
-        public void OneStepInTheGame(Button button, Control.ControlCollection controlCollection)
-        {
-            // Get empty square coordinates.
-            Point zeroPosition = GetEmptySquareCoordinates();
-            // Get user move coordinates.
-            Point userMove = ConvertButtonToCoordinates(button);
-
-            // Check the top square.
-            if (userMove.X - 1 >= 0 && _arr[userMove.X - 1, userMove.Y] == 0)
-            {
-                // If an empty square is found here, change the user's move with an empty square.
-                (_arr[zeroPosition.X, zeroPosition.Y], _arr[userMove.X, userMove.Y]) =
-                    (_arr[userMove.X, userMove.Y], _arr[zeroPosition.X, zeroPosition.Y]); // Tuples which enables swapping two variables without a temporary one;
-                // Displaying the playing field on the buttons.
-                SetCurrentArrIntoButtonsText(controlCollection);
-            }
-            // Check the bottom square.
-            else if (userMove.X + 1 <= 3 && _arr[userMove.X + 1, userMove.Y] == 0)
-            {
-                // If an empty square is found here, change the user's move with an empty square.
-                (_arr[zeroPosition.X, zeroPosition.Y], _arr[userMove.X, userMove.Y]) =
-                    (_arr[userMove.X, userMove.Y], _arr[zeroPosition.X, zeroPosition.Y]); // Tuples which enables swapping two variables without a temporary one;
-                // Displaying the playing field on the buttons.
-                SetCurrentArrIntoButtonsText(controlCollection);
-            }
-            // Check left square.
-            else if (userMove.Y - 1 >= 0 && _arr[userMove.X, userMove.Y - 1] == 0)
-            {
-                // If an empty square is found here, change the user's move with an empty square.
-                (_arr[zeroPosition.X, zeroPosition.Y], _arr[userMove.X, userMove.Y]) =
-                    (_arr[userMove.X, userMove.Y], _arr[zeroPosition.X, zeroPosition.Y]); // Tuples which enables swapping two variables without a temporary one;
-                // Displaying the playing field on the buttons.
-                SetCurrentArrIntoButtonsText(controlCollection);
-            }
-            else if (userMove.Y + 1 <= 3 && _arr[userMove.X, userMove.Y + 1] == 0)
-            {
-                // If an empty square is found here, change the user's move with an empty square.
-                (_arr[zeroPosition.X, zeroPosition.Y], _arr[userMove.X, userMove.Y]) =
-                    (_arr[userMove.X, userMove.Y], _arr[zeroPosition.X, zeroPosition.Y]); // Tuples which enables swapping two variables without a temporary one;
-                // Displaying the playing field on the buttons.
-                SetCurrentArrIntoButtonsText(controlCollection);
-            }
-
-            CountingButtonsInTheirPlacesasPercentage(controlCollection);
-        }
-
-        // Converts the pressed button on the playfield to the corresponding array coordinates.
-        public Point ConvertButtonToCoordinates(Button button)
-        {
-            var coordinates = new Point();
-            if (button.Name == "gameField_button1")
-            {
-                coordinates.X = 0;
-                coordinates.Y = 0;
-            }
-            else if (button.Name == "gameField_button2")
-            {
-                coordinates.X = 0;
-                coordinates.Y = 1;
-            }
-            else if (button.Name == "gameField_button3")
-            {
-                coordinates.X = 0;
-                coordinates.Y = 2;
-            }
-            else if (button.Name == "gameField_button4")
-            {
-                coordinates.X = 0;
-                coordinates.Y = 3;
-            }
-            else if (button.Name == "gameField_button5")
-            {
-                coordinates.X = 1;
-                coordinates.Y = 0;
-            }
-            else if (button.Name == "gameField_button6")
-            {
-                coordinates.X = 1;
-                coordinates.Y = 1;
-            }
-            else if (button.Name == "gameField_button7")
-            {
-                coordinates.X = 1;
-                coordinates.Y = 2;
-            }
-            else if (button.Name == "gameField_button8")
-            {
-                coordinates.X = 1;
-                coordinates.Y = 3;
-            }
-            else if (button.Name == "gameField_button9")
-            {
-                coordinates.X = 2;
-                coordinates.Y = 0;
-            }
-            else if (button.Name == "gameField_button10")
-            {
-                coordinates.X = 2;
-                coordinates.Y = 1;
-            }
-            else if (button.Name == "gameField_button11")
-            {
-                coordinates.X = 2;
-                coordinates.Y = 2;
-            }
-            else if (button.Name == "gameField_button12")
-            {
-                coordinates.X = 2;
-                coordinates.Y = 3;
-            }
-            else if (button.Name == "gameField_button13")
-            {
-                coordinates.X = 3;
-                coordinates.Y = 0;
-            }
-            else if (button.Name == "gameField_button14")
-            {
-                coordinates.X = 3;
-                coordinates.Y = 1;
-            }
-            else if (button.Name == "gameField_button15")
-            {
-                coordinates.X = 3;
-                coordinates.Y = 2;
-            }
-            else if (button.Name == "gameField_button16")
-            {
-                coordinates.X = 3;
-                coordinates.Y = 3;
-            }
-            return coordinates;
-        }
-        //    0  1  2  3
-        // 0  1  2  3  4
-        // 1  5  6  7  8
-        // 2  9  10 11 12
-        // 3  13 14 15 0
+        // Game start time.
+        _game.GameStartTime = DateTime.Now;
     }
+
+    // Menu item "Exit".
+    private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        // Do you really want to leave ?.
+        _game.ReallyWantToLeave();
+    }
+
+    // Click on the playing field.
+    private void gameField_buttons_Click(object sender, EventArgs e)
+    {
+        // One step in the game.
+        _game.OneStepInTheGame((Button)sender, Controls);
+    }
+}
+
+// The class that implements the logic of the game.
+internal class Game
+{
+    // Array for storing button values.
+    private readonly int[,] _arr =
+    {
+        { 1, 2, 3, 4 },
+        { 5, 6, 7, 8 },
+        { 9, 10, 11, 12 },
+        { 13, 14, 15, 0 }
+    };
+
+    // Game start time.
+    public DateTime GameStartTime { get; set; }
+
+    // Game stop time.
+    private DateTime GameStopTime { get; set; }
+
+    // Counting the number of buttons in their places as a percentage.
+    public void CountingButtonsInTheirPlacesasPercentage(Control.ControlCollection controlCollection)
+    {
+        int count = 0;
+        for (int i = 0; i < 4; i++)
+        {
+            for (int j = 0; j < 4; j++)
+            {
+                if (i == 0 && j == 0 && _arr[0, 0] == 1)
+                {
+                    count++;
+                }
+
+                if (i == 0 && j == 1 && _arr[0, 1] == 2)
+                {
+                    count++;
+                }
+
+                if (i == 0 && j == 2 && _arr[0, 2] == 3)
+                {
+                    count++;
+                }
+
+                if (i == 0 && j == 3 && _arr[0, 3] == 4)
+                {
+                    count++;
+                }
+
+                if (i == 1 && j == 0 && _arr[1, 0] == 5)
+                {
+                    count++;
+                }
+
+                if (i == 1 && j == 1 && _arr[1, 1] == 6)
+                {
+                    count++;
+                }
+
+                if (i == 1 && j == 2 && _arr[1, 2] == 7)
+                {
+                    count++;
+                }
+
+                if (i == 1 && j == 3 && _arr[1, 3] == 8)
+                {
+                    count++;
+                }
+
+                if (i == 2 && j == 0 && _arr[2, 0] == 9)
+                {
+                    count++;
+                }
+
+                if (i == 2 && j == 1 && _arr[2, 1] == 10)
+                {
+                    count++;
+                }
+
+                if (i == 2 && j == 2 && _arr[2, 2] == 11)
+                {
+                    count++;
+                }
+
+                if (i == 2 && j == 3 && _arr[2, 3] == 12)
+                {
+                    count++;
+                }
+
+                if (i == 3 && j == 0 && _arr[3, 0] == 13)
+                {
+                    count++;
+                }
+
+                if (i == 3 && j == 1 && _arr[3, 1] == 14)
+                {
+                    count++;
+                }
+
+                if (i == 3 && j == 2 && _arr[3, 2] == 15)
+                {
+                    count++;
+                }
+
+                if (i == 3 && j == 3 && _arr[3, 3] == 0)
+                {
+                    count++;
+                }
+                //    0  1  2  3
+                // 0  1  2  3  4
+                // 1  5  6  7  8
+                // 2  9  10 11 12
+                // 3  13 14 15 0
+            }
+        }
+
+        foreach (Control control in controlCollection)
+        {
+            if (control is ProgressBar bar && bar.Name == "progressBar1")
+            {
+                bar.Value = (int)(count * 6.5);
+            }
+        }
+
+        if (count == 16)
+        {
+            GameStopTime = DateTime.Now;
+            _ = MessageBox.Show("Congratulations! You have done the impossible! You won !" +
+                            $"\nTo win you spent {GameStopTime - GameStartTime:hh\\:mm\\:ss}",
+                "Game \"Fifteen\".", MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+            AskPlayMore();
+        }
+    }
+
+    // Do you want to play again?.
+    private void AskPlayMore()
+    {
+        DialogResult result = MessageBox.Show("Do you want to play again ?", "Game \"Fifteen\".", MessageBoxButtons.YesNo,
+            MessageBoxIcon.Question);
+        if (result == DialogResult.No)
+        {
+            Application.Exit();
+        }
+        else if (result == DialogResult.Yes)
+        {
+            Application.Restart();
+        }
+    }
+
+    // Shuffle array.
+    public void ShuffleArray()
+    {
+        Random r = new();
+
+        int n = 3;
+        while (n > 0)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    int row = r.Next(0, 4);
+                    int col = r.Next(0, 4);
+                    (_arr[i, j], _arr[row, col]) = (_arr[row, col], _arr[i, j]);
+                }
+            }
+
+            n--;
+        }
+    }
+
+    // Displaying the playing field on the buttons.
+    public void SetCurrentArrIntoButtonsText(Control.ControlCollection controlCollection)
+    {
+        int k = 1;
+        for (int i = 0; i < 4; i++)
+        {
+            for (int j = 0; j < 4; j++)
+            {
+                foreach (Control control in controlCollection)
+                {
+                    if (control is Button button && button.Name == "gameField_button" + k)
+                    {
+                        button.Text = _arr[i, j] == 0 ? "" : _arr[i, j].ToString();
+                        k++;
+                    }
+                }
+            }
+        }
+    }
+
+    // Returns the coordinates of the empty square.
+    private Point GetEmptySquareCoordinates()
+    {
+        // Find the coordinates of the empty button.
+        Point p = new();
+
+        for (int i = 0; i < 4; i++)
+        {
+            for (int j = 0; j < 4; j++)
+            {
+                if (_arr[i, j] == 0)
+                {
+                    p.X = i;
+                    p.Y = j;
+                }
+            }
+        }
+
+        return p;
+    }
+
+    // Do you really want to leave ?.
+    public void ReallyWantToLeave()
+    {
+        DialogResult result = MessageBox.Show("Do you really want to leave ?", "Game \"Fifteen\".", MessageBoxButtons.YesNo,
+            MessageBoxIcon.Question);
+        if (result == DialogResult.Yes)
+        {
+            Application.Exit();
+        }
+        else
+        {
+            return;
+        }
+    }
+
+    // One step in the game.
+    public void OneStepInTheGame(Button button, Control.ControlCollection controlCollection)
+    {
+        // Get empty square coordinates.
+        Point zeroPosition = GetEmptySquareCoordinates();
+        // Get user move coordinates.
+        Point userMove = ConvertButtonToCoordinates(button);
+
+        // Check the top square.
+        if (userMove.X - 1 >= 0 && _arr[userMove.X - 1, userMove.Y] == 0)
+        {
+            // If an empty square is found here, change the user's move with an empty square.
+            (_arr[zeroPosition.X, zeroPosition.Y], _arr[userMove.X, userMove.Y]) =
+                (_arr[userMove.X, userMove.Y],
+                    _arr[zeroPosition.X,
+                        zeroPosition.Y]); // Tuples which enables swapping two variables without a temporary one;
+            // Displaying the playing field on the buttons.
+            SetCurrentArrIntoButtonsText(controlCollection);
+        }
+        // Check the bottom square.
+        else if (userMove.X + 1 <= 3 && _arr[userMove.X + 1, userMove.Y] == 0)
+        {
+            // If an empty square is found here, change the user's move with an empty square.
+            (_arr[zeroPosition.X, zeroPosition.Y], _arr[userMove.X, userMove.Y]) =
+                (_arr[userMove.X, userMove.Y],
+                    _arr[zeroPosition.X,
+                        zeroPosition.Y]); // Tuples which enables swapping two variables without a temporary one;
+            // Displaying the playing field on the buttons.
+            SetCurrentArrIntoButtonsText(controlCollection);
+        }
+        // Check left square.
+        else if (userMove.Y - 1 >= 0 && _arr[userMove.X, userMove.Y - 1] == 0)
+        {
+            // If an empty square is found here, change the user's move with an empty square.
+            (_arr[zeroPosition.X, zeroPosition.Y], _arr[userMove.X, userMove.Y]) =
+                (_arr[userMove.X, userMove.Y],
+                    _arr[zeroPosition.X,
+                        zeroPosition.Y]); // Tuples which enables swapping two variables without a temporary one;
+            // Displaying the playing field on the buttons.
+            SetCurrentArrIntoButtonsText(controlCollection);
+        }
+        else if (userMove.Y + 1 <= 3 && _arr[userMove.X, userMove.Y + 1] == 0)
+        {
+            // If an empty square is found here, change the user's move with an empty square.
+            (_arr[zeroPosition.X, zeroPosition.Y], _arr[userMove.X, userMove.Y]) =
+                (_arr[userMove.X, userMove.Y],
+                    _arr[zeroPosition.X,
+                        zeroPosition.Y]); // Tuples which enables swapping two variables without a temporary one;
+            // Displaying the playing field on the buttons.
+            SetCurrentArrIntoButtonsText(controlCollection);
+        }
+
+        CountingButtonsInTheirPlacesasPercentage(controlCollection);
+    }
+
+    // Converts the pressed button on the playfield to the corresponding array coordinates.
+    private Point ConvertButtonToCoordinates(Button button)
+    {
+        Point coordinates = new();
+        if (button.Name == "gameField_button1")
+        {
+            coordinates.X = 0;
+            coordinates.Y = 0;
+        }
+        else if (button.Name == "gameField_button2")
+        {
+            coordinates.X = 0;
+            coordinates.Y = 1;
+        }
+        else if (button.Name == "gameField_button3")
+        {
+            coordinates.X = 0;
+            coordinates.Y = 2;
+        }
+        else if (button.Name == "gameField_button4")
+        {
+            coordinates.X = 0;
+            coordinates.Y = 3;
+        }
+        else if (button.Name == "gameField_button5")
+        {
+            coordinates.X = 1;
+            coordinates.Y = 0;
+        }
+        else if (button.Name == "gameField_button6")
+        {
+            coordinates.X = 1;
+            coordinates.Y = 1;
+        }
+        else if (button.Name == "gameField_button7")
+        {
+            coordinates.X = 1;
+            coordinates.Y = 2;
+        }
+        else if (button.Name == "gameField_button8")
+        {
+            coordinates.X = 1;
+            coordinates.Y = 3;
+        }
+        else if (button.Name == "gameField_button9")
+        {
+            coordinates.X = 2;
+            coordinates.Y = 0;
+        }
+        else if (button.Name == "gameField_button10")
+        {
+            coordinates.X = 2;
+            coordinates.Y = 1;
+        }
+        else if (button.Name == "gameField_button11")
+        {
+            coordinates.X = 2;
+            coordinates.Y = 2;
+        }
+        else if (button.Name == "gameField_button12")
+        {
+            coordinates.X = 2;
+            coordinates.Y = 3;
+        }
+        else if (button.Name == "gameField_button13")
+        {
+            coordinates.X = 3;
+            coordinates.Y = 0;
+        }
+        else if (button.Name == "gameField_button14")
+        {
+            coordinates.X = 3;
+            coordinates.Y = 1;
+        }
+        else if (button.Name == "gameField_button15")
+        {
+            coordinates.X = 3;
+            coordinates.Y = 2;
+        }
+        else if (button.Name == "gameField_button16")
+        {
+            coordinates.X = 3;
+            coordinates.Y = 3;
+        }
+
+        return coordinates;
+    }
+    //    0  1  2  3
+    // 0  1  2  3  4
+    // 1  5  6  7  8
+    // 2  9  10 11 12
+    // 3  13 14 15 0
 }
