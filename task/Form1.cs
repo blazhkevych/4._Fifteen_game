@@ -216,23 +216,44 @@ namespace task
             // Check if there is an empty square nearby.
             //IsAnEmptySquareNearby(userMove);
 
-            // Let the battles begin!
+            // Let the battle begin!
 
-
-            // my move - 1, 1
-            // square to check is
-            //      0, 1
-            // 1,0  >>1,1<<    1, 2 
-            //      2, 1
+            // if my move is - 1,1
+            // square to check is:
+            //        0,1
+            // 1,0  >>1,1<<  1,2 
+            //        2,1
 
             // Check the top square.
-            if (userMove.X - 1 == 0 && userMove.X - 1 >= 0)
+            if (_arr[userMove.X - 1, userMove.Y] == 0 && userMove.X - 1 >= 0)
             {
                 // If an empty square is found here, change the user's move with an empty square.
-                (zeroPosition, userMove) = (userMove, zeroPosition); // Tuples which enables swapping two variables without a temporary one;
+                (_arr[zeroPosition.X, zeroPosition.Y], _arr[userMove.X, userMove.Y]) =
+                    (_arr[userMove.X, userMove.Y], _arr[zeroPosition.X, zeroPosition.Y]); // Tuples which enables swapping two variables without a temporary one;
             }
-
-
+            // Check the bottom square.
+            else if (_arr[userMove.X + 1, userMove.Y] == 0 && userMove.X + 1 <= 3)
+            {
+                // If an empty square is found here, change the user's move with an empty square.
+                (_arr[zeroPosition.X, zeroPosition.Y], _arr[userMove.X, userMove.Y]) =
+                    (_arr[userMove.X, userMove.Y], _arr[zeroPosition.X, zeroPosition.Y]); // Tuples which enables swapping two variables without a temporary one;
+            }
+            // Check left square.
+            else if (_arr[userMove.X, userMove.X - 1] == 0 && userMove.Y >= 0)
+            {
+                // If an empty square is found here, change the user's move with an empty square.
+                (_arr[zeroPosition.X, zeroPosition.Y], _arr[userMove.X, userMove.Y]) =
+                    (_arr[userMove.X, userMove.Y], _arr[zeroPosition.X, zeroPosition.Y]); // Tuples which enables swapping two variables without a temporary one;
+            }
+            else if (_arr[userMove.X, userMove.Y + 1] == 0 && userMove.Y + 1 <= 3)
+            {
+                // If an empty square is found here, change the user's move with an empty square.
+                (_arr[zeroPosition.X, zeroPosition.Y], _arr[userMove.X, userMove.Y]) =
+                    (_arr[userMove.X, userMove.Y], _arr[zeroPosition.X, zeroPosition.Y]); // Tuples which enables swapping two variables without a temporary one;
+            }
+            // Just else ...
+            else
+                return;
         }
 
         // Converts the pressed button on the playfield to the corresponding array coordinates.
