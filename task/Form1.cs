@@ -91,11 +91,14 @@ namespace task
 
         }
 
+        // Get ControlCollection controlCollection.
+        //public TYPE Type { get; set; }
+
         // Click on the playing field.
         private void gameField_buttons_Click(object sender, EventArgs e)
         {
             // Converting the pressed button to the corresponding array coordinates.
-            _game.OneStepInTheGame((Button)sender);
+            _game.OneStepInTheGame((Button)sender, Controls);
             // Display the updated array coordinates on the playing field after the player's turn.
 
 
@@ -105,6 +108,9 @@ namespace task
     // The class that implements the logic of the game.
     internal class Game
     {
+        // Get ControlCollection controlCollection;
+        public Control.ControlCollection ControlCollection { get; set; }
+
         // Time spent playing.
         public DateTime GameStartTime { get; set; }
 
@@ -207,7 +213,7 @@ namespace task
         //}
 
         // One step in the game.
-        public void OneStepInTheGame(Button button)
+        public void OneStepInTheGame(Button button, Control.ControlCollection controlCollection)
         {
             // Get empty square coordinates.
             Point zeroPosition = GetEmptySquareCoordinates();
@@ -225,31 +231,39 @@ namespace task
             //        2,1
 
             // Check the top square.
-            if (_arr[userMove.X - 1, userMove.Y] == 0 && userMove.X - 1 >= 0)
+            if (userMove.X - 1 >= 0 && _arr[userMove.X - 1, userMove.Y] == 0)
             {
                 // If an empty square is found here, change the user's move with an empty square.
                 (_arr[zeroPosition.X, zeroPosition.Y], _arr[userMove.X, userMove.Y]) =
                     (_arr[userMove.X, userMove.Y], _arr[zeroPosition.X, zeroPosition.Y]); // Tuples which enables swapping two variables without a temporary one;
+                // Displaying the playing field on the buttons.
+                SetCurrentArrIntoButtonsText(controlCollection);
             }
             // Check the bottom square.
-            else if (_arr[userMove.X + 1, userMove.Y] == 0 && userMove.X + 1 <= 3)
+            else if (userMove.X + 1 <= 3 && _arr[userMove.X + 1, userMove.Y] == 0)
             {
                 // If an empty square is found here, change the user's move with an empty square.
                 (_arr[zeroPosition.X, zeroPosition.Y], _arr[userMove.X, userMove.Y]) =
                     (_arr[userMove.X, userMove.Y], _arr[zeroPosition.X, zeroPosition.Y]); // Tuples which enables swapping two variables without a temporary one;
+                // Displaying the playing field on the buttons.
+                SetCurrentArrIntoButtonsText(controlCollection);
             }
             // Check left square.
-            else if (_arr[userMove.X, userMove.X - 1] == 0 && userMove.Y >= 0)
+            else if (userMove.X - 1 >= 0 && _arr[userMove.X, userMove.X - 1] == 0)
             {
                 // If an empty square is found here, change the user's move with an empty square.
                 (_arr[zeroPosition.X, zeroPosition.Y], _arr[userMove.X, userMove.Y]) =
                     (_arr[userMove.X, userMove.Y], _arr[zeroPosition.X, zeroPosition.Y]); // Tuples which enables swapping two variables without a temporary one;
+                // Displaying the playing field on the buttons.
+                SetCurrentArrIntoButtonsText(controlCollection);
             }
-            else if (_arr[userMove.X, userMove.Y + 1] == 0 && userMove.Y + 1 <= 3)
+            else if (userMove.Y + 1 <= 3 && _arr[userMove.X, userMove.Y + 1] == 0)
             {
                 // If an empty square is found here, change the user's move with an empty square.
                 (_arr[zeroPosition.X, zeroPosition.Y], _arr[userMove.X, userMove.Y]) =
                     (_arr[userMove.X, userMove.Y], _arr[zeroPosition.X, zeroPosition.Y]); // Tuples which enables swapping two variables without a temporary one;
+                // Displaying the playing field on the buttons.
+                SetCurrentArrIntoButtonsText(controlCollection);
             }
             // Just else ...
             else
