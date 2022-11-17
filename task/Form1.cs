@@ -148,7 +148,7 @@ namespace task
                     {
                         if (control is Button && ((Button)control).Name == "gameField_button" + k)
                         {
-                            if (((Button)control).Text =="0")
+                            if (_arr[i, j] == 0)
                                 ((Button)control).Text = "";
                             else
                                 ((Button)control).Text = _arr[i, j].ToString();
