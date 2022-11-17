@@ -77,6 +77,7 @@ namespace task
             _game.ButtonsInTheirPlaces = _game.CountingButtonsInTheirPlaces();
 
             // Display on the progress bar the number of buttons in their places as a percentage.
+            progressBar1.Value = _game.ButtonsInTheirPlaces;
 
             // Game start time.
             _game.GameStartTime = DateTime.Now;
@@ -112,10 +113,10 @@ namespace task
     internal class Game
     {
         // The number of buttons in their places as a percentage.
-        public string ButtonsInTheirPlaces { get; set; }
+        public int ButtonsInTheirPlaces { get; set; }
 
         // Counting the number of buttons in their places as a percentage.
-        public string CountingButtonsInTheirPlaces()
+        public int CountingButtonsInTheirPlaces()
         {
             int count = 0;
             for (int i = 0; i < 4; i++)
@@ -137,7 +138,7 @@ namespace task
                 }
             }
 
-            return (count * 6.5) + " % in their places.";
+            return count * 6.5;
         }
 
         // Get ControlCollection controlCollection;
