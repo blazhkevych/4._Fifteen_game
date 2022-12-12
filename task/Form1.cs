@@ -11,65 +11,8 @@ namespace task;
 ///     кнопок в процентном отношении находится на своих местах;
 ///     • предусмотреть возможность начать новую игру.
 /// </summary>
-
 public partial class Form1 : Form, IFifteenView
 {
-    #region IFifteenView Implementation
-
-    #region EVENTS:
-    // Event of pressing the "New Game" button.
-    public event EventHandler<EventArgs>? NewGameButtonClickEvent;
-
-    // Event of pressing a button on the game field.
-    public event EventHandler<EventArgs>? GameFieldButtonClickEvent;
-
-    // Event of user move.
-    public event EventHandler<EventArgs>? UserMoveButtonPressedClickEvent;
-    #endregion
-
-    #region MESSAGES:
-    // Output a message about victory.
-    public void WinMessage(TimeSpan timeSpan) // todo: по идее, не должно быть никаких принимаемых параметров.
-    {
-        MessageBox.Show("Congratulations! You have done the impossible! You won !" +
-                        $"\nTo win you spent {timeSpan:hh\\:mm\\:ss}",
-            "Game \"Fifteen\".", MessageBoxButtons.OK,
-            MessageBoxIcon.Information);
-        AskPlayMore();
-    }
-
-    // Display a message "Do you want to play again?".
-    public void AskPlayMore()
-    {
-        DialogResult result = MessageBox.Show("Do you want to play again ?", "Game \"Fifteen\".", MessageBoxButtons.YesNo,
-            MessageBoxIcon.Question);
-        if (result == DialogResult.No)
-        {
-            Application.Exit();
-        }
-        else if (result == DialogResult.Yes)
-        {
-            Application.Restart();
-        }
-    }
-
-    // Do you really want to leave ?.
-    public void ReallyWantToLeave()
-    {
-        DialogResult result = MessageBox.Show("Do you really want to leave ?", "Game \"Fifteen\".", MessageBoxButtons.YesNo,
-            MessageBoxIcon.Question);
-        if (result == DialogResult.Yes)
-        {
-            Application.Exit();
-        }
-        else
-        {
-            return;
-        }
-    }
-    #endregion
-    #endregion
-
     // Form constructor.
     public Form1()
     {
@@ -147,4 +90,56 @@ public partial class Form1 : Form, IFifteenView
         UserMoveButtonPressedClickEvent?.Invoke(sender, EventArgs.Empty);
         GameFieldButtonClickEvent?.Invoke(this, EventArgs.Empty);
     }
+
+    #region IFifteenView Implementation
+
+    #region EVENTS:
+
+    // Event of pressing the "New Game" button.
+    public event EventHandler<EventArgs>? NewGameButtonClickEvent;
+
+    // Event of pressing a button on the game field.
+    public event EventHandler<EventArgs>? GameFieldButtonClickEvent;
+
+    // Event of user move.
+    public event EventHandler<EventArgs>? UserMoveButtonPressedClickEvent;
+
+    #endregion
+
+    #region MESSAGES:
+
+    // Output a message about victory.
+    public void WinMessage(TimeSpan timeSpan) // todo: по идее, не должно быть никаких принимаемых параметров.
+    {
+        MessageBox.Show("Congratulations! You have done the impossible! You won !" +
+                        $"\nTo win you spent {timeSpan:hh\\:mm\\:ss}",
+            "Game \"Fifteen\".", MessageBoxButtons.OK,
+            MessageBoxIcon.Information);
+        AskPlayMore();
+    }
+
+    // Display a message "Do you want to play again?".
+    public void AskPlayMore()
+    {
+        var result = MessageBox.Show("Do you want to play again ?", "Game \"Fifteen\".", MessageBoxButtons.YesNo,
+            MessageBoxIcon.Question);
+        if (result == DialogResult.No)
+            Application.Exit();
+        else if (result == DialogResult.Yes) Application.Restart();
+    }
+
+    // Do you really want to leave ?.
+    public void ReallyWantToLeave()
+    {
+        var result = MessageBox.Show("Do you really want to leave ?", "Game \"Fifteen\".", MessageBoxButtons.YesNo,
+            MessageBoxIcon.Question);
+        if (result == DialogResult.Yes)
+            Application.Exit();
+        else
+            return;
+    }
+
+    #endregion
+
+    #endregion
 }
