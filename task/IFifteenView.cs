@@ -2,21 +2,18 @@
 
 public interface IFifteenView
 {
+    // Indexer for accessing array elements.
+    public string this[int i, int j] { get; set; }
+
+    // User move button name.
+    string UserMoveButtonName { get; set; }
+
     // Event of pressing the "New Game" button.
     event EventHandler<EventArgs> NewGameButtonClickEvent;
 
     // Event of pressing a button on the game field.
     event EventHandler<EventArgs>? GameFieldButtonClickEvent;
 
-    // Event of user move.
-    public event EventHandler<EventArgs>? UserMoveButtonPressedClickEvent;
-
     // Displaying a message about the victory.
     void WinMessage(TimeSpan timeSpan);
-
-    // Display a message "Do you want to play again?".
-    public void AskPlayMore();
-
-    // Do you really want to leave ?.
-    void ReallyWantToLeave();
 }

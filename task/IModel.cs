@@ -3,7 +3,7 @@
 public interface IModel
 {
     // Indexer for accessing array elements.
-    int this[int i, int j] { get; set; }
+    string this[int i, int j] { get; set; }
 
     // Game start time.
     DateTime GameStartTime { get; set; }

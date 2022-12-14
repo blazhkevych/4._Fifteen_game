@@ -13,10 +13,22 @@ namespace task;
 /// </summary>
 public partial class Form1 : Form, IFifteenView
 {
+    // Array of buttons on the game field.
+    private readonly Button[,] _gameFieldButtons = new Button[4, 4];
+
     // Form constructor.
     public Form1()
     {
         InitializeComponent();
+
+        // Find all buttons on the game field and add to the _gameFieldButtons.
+        var k = 0;
+        for (var i = 0; i < 4; i++)
+        for (var j = 0; j < 4; j++)
+        {
+            _gameFieldButtons[i, j] = Controls.Find("gameField_button" + (k + 1), true)[0] as Button;
+            k++;
+        }
 
         // Turn off the playing field before starting the game.
         TurnOffThePlayingFields();
@@ -86,12 +98,23 @@ public partial class Form1 : Form, IFifteenView
     private void gameField_buttons_Click(object sender, EventArgs e)
     {
         // One step in the game.
+        // Get the name of the button that was clicked.
+        UserMoveButtonName = (sender as Button).Name;
 
-        UserMoveButtonPressedClickEvent?.Invoke(sender, EventArgs.Empty);
         GameFieldButtonClickEvent?.Invoke(this, EventArgs.Empty);
     }
 
     #region IFifteenView Implementation
+
+    // User move button name.
+    public string UserMoveButtonName { get; set; }
+
+    // Indexer for accessing array elements.
+    public string this[int i, int j]
+    {
+        get => _gameFieldButtons[i, j].Text;
+        set => _gameFieldButtons[i, j].Text = value;
+    }
 
     #region EVENTS:
 
@@ -100,9 +123,6 @@ public partial class Form1 : Form, IFifteenView
 
     // Event of pressing a button on the game field.
     public event EventHandler<EventArgs>? GameFieldButtonClickEvent;
-
-    // Event of user move.
-    public event EventHandler<EventArgs>? UserMoveButtonPressedClickEvent;
 
     #endregion
 

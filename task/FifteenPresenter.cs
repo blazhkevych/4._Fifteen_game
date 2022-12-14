@@ -5,187 +5,138 @@ public class FifteenPresenter
     private readonly IModel _model;
     private readonly IFifteenView _view;
 
+    // User move coordinates.
+    private (int, int) _userMove;
+
     // The principle of inversion of dependencies.
     // The constructor takes the interface of the model and the view.
     public FifteenPresenter(IModel model, IFifteenView view)
     {
         _model = model;
         _view = view;
-        UserMove = new Point(-1, -1);
+        _userMove = (-1, -1);
         // Presenter subscribes to notifications about View events.
         // Event of pressing the "New Game" button.
         _view.NewGameButtonClickEvent += ShuffleArray;
-        _view.NewGameButtonClickEvent += SetCurrentArrIntoButtonsText;
         _view.NewGameButtonClickEvent += CountingButtonsInTheirPlacesasPercentage;
         _view.NewGameButtonClickEvent += SetGameStartTime;
 
         // Event of pressing a button on the game field.
-        _view.UserMoveButtonPressedClickEvent += GetUserMove; // get button
-        _view.GameFieldButtonClickEvent += OneStepInTheGame; // get form
+        _view.GameFieldButtonClickEvent += OneStepInTheGame;
     }
 
-    // User move coordinates.
-    private Point UserMove { get; set; }
-
-    // Converts the pressed button on the playfield to the corresponding array coordinates.
-    private Point ConvertButtonToCoordinates(Button button)
+    // Converts the pressed buttons name on the playfield to the corresponding array coordinates.
+    private void ConvertButtonToCoordinates(string buttonName)
     {
-        Point coordinates = new();
-        if (button.Name == "gameField_button1")
-        {
-            coordinates.X = 0;
-            coordinates.Y = 0;
-        }
-        else if (button.Name == "gameField_button2")
-        {
-            coordinates.X = 0;
-            coordinates.Y = 1;
-        }
-        else if (button.Name == "gameField_button3")
-        {
-            coordinates.X = 0;
-            coordinates.Y = 2;
-        }
-        else if (button.Name == "gameField_button4")
-        {
-            coordinates.X = 0;
-            coordinates.Y = 3;
-        }
-        else if (button.Name == "gameField_button5")
-        {
-            coordinates.X = 1;
-            coordinates.Y = 0;
-        }
-        else if (button.Name == "gameField_button6")
-        {
-            coordinates.X = 1;
-            coordinates.Y = 1;
-        }
-        else if (button.Name == "gameField_button7")
-        {
-            coordinates.X = 1;
-            coordinates.Y = 2;
-        }
-        else if (button.Name == "gameField_button8")
-        {
-            coordinates.X = 1;
-            coordinates.Y = 3;
-        }
-        else if (button.Name == "gameField_button9")
-        {
-            coordinates.X = 2;
-            coordinates.Y = 0;
-        }
-        else if (button.Name == "gameField_button10")
-        {
-            coordinates.X = 2;
-            coordinates.Y = 1;
-        }
-        else if (button.Name == "gameField_button11")
-        {
-            coordinates.X = 2;
-            coordinates.Y = 2;
-        }
-        else if (button.Name == "gameField_button12")
-        {
-            coordinates.X = 2;
-            coordinates.Y = 3;
-        }
-        else if (button.Name == "gameField_button13")
-        {
-            coordinates.X = 3;
-            coordinates.Y = 0;
-        }
-        else if (button.Name == "gameField_button14")
-        {
-            coordinates.X = 3;
-            coordinates.Y = 1;
-        }
-        else if (button.Name == "gameField_button15")
-        {
-            coordinates.X = 3;
-            coordinates.Y = 2;
-        }
-        else if (button.Name == "gameField_button16")
-        {
-            coordinates.X = 3;
-            coordinates.Y = 3;
-        }
-
-        return coordinates;
+        if (buttonName == "gameField_button1")
+            _userMove = (0, 0);
+        else if (buttonName == "gameField_button2")
+            _userMove = (0, 1);
+        else if (buttonName == "gameField_button3")
+            _userMove = (0, 2);
+        else if (buttonName == "gameField_button4")
+            _userMove = (0, 3);
+        else if (buttonName == "gameField_button5")
+            _userMove = (1, 0);
+        else if (buttonName == "gameField_button6")
+            _userMove = (1, 1);
+        else if (buttonName == "gameField_button7")
+            _userMove = (1, 2);
+        else if (buttonName == "gameField_button8")
+            _userMove = (1, 3);
+        else if (buttonName == "gameField_button9")
+            _userMove = (2, 0);
+        else if (buttonName == "gameField_button10")
+            _userMove = (2, 1);
+        else if (buttonName == "gameField_button11")
+            _userMove = (2, 2);
+        else if (buttonName == "gameField_button12")
+            _userMove = (2, 3);
+        else if (buttonName == "gameField_button13")
+            _userMove = (3, 0);
+        else if (buttonName == "gameField_button14")
+            _userMove = (3, 1);
+        else if (buttonName == "gameField_button15")
+            _userMove = (3, 2);
+        else if (buttonName == "gameField_button16") _userMove = (3, 3);
     }
 
-    private Point GetEmptySquareCoordinates()
+    // Get the coordinates of the empty cell.
+    private (int, int) GetEmptySquareCoordinates()
     {
-        // Find the coordinates of the empty button.
-        Point p = new();
-
+        var p = (-1, -1);
         for (var i = 0; i < 4; i++)
         for (var j = 0; j < 4; j++)
-            if (_model[i, j] == 0)
+            if (_model[i, j] == "")
             {
-                p.X = i;
-                p.Y = j;
+                p.Item1 = i;
+                p.Item2 = j;
             }
 
         return p;
     }
 
-    // Get user move coordinates.
-    private void GetUserMove(object sender, EventArgs e)
+    // Update the game field from _model to _view.
+    private void UpdateGameField()
     {
-        var button = (Button)sender;
-        UserMove = ConvertButtonToCoordinates(button);
+        for (var i = 0; i < 4; i++)
+        for (var j = 0; j < 4; j++)
+            if (_model[i, j] == "")
+                _view[i, j] = "";
+            else
+                _view[i, j] = _model[i, j];
     }
 
     // One step in the game.
     private void OneStepInTheGame(object sender, EventArgs e)
     {
+        // Get user move coordinates.
+        ConvertButtonToCoordinates(_view.UserMoveButtonName);
         // Get empty square coordinates.
         var zeroPosition = GetEmptySquareCoordinates();
 
         // Check the top square.
-        if (UserMove.X - 1 >= 0 && _model[UserMove.X - 1, UserMove.Y] == 0)
+        if (_userMove.Item1 - 1 >= 0 && _model[_userMove.Item1 - 1, _userMove.Item2] == "")
         {
             // If an empty square is found here, change the user's move with an empty square.
-            (_model[zeroPosition.X, zeroPosition.Y], _model[UserMove.X, UserMove.Y]) =
-                (_model[UserMove.X, UserMove.Y],
-                    _model[zeroPosition.X,
-                        zeroPosition.Y]); // Tuples which enables swapping two variables without a temporary one;
+            (_model[zeroPosition.Item1, zeroPosition.Item2], _model[_userMove.Item1, _userMove.Item2]) =
+                (_model[_userMove.Item1, _userMove.Item2],
+                    _model[zeroPosition.Item1,
+                        zeroPosition.Item2]); // Tuples which enables swapping two variables without a temporary one;
             // Displaying the playing field on the buttons.
-            SetCurrentArrIntoButtonsText(sender, e);
+            UpdateGameField();
         }
         // Check the bottom square.
-        else if (UserMove.X + 1 <= 3 && _model[UserMove.X + 1, UserMove.Y] == 0)
+        else if (_userMove.Item1 + 1 <= 3 && _model[_userMove.Item1 + 1, _userMove.Item2] == "")
         {
             // If an empty square is found here, change the user's move with an empty square.
-            (_model[zeroPosition.X, zeroPosition.Y], _model[UserMove.X, UserMove.Y]) =
-                (_model[UserMove.X, UserMove.Y],
-                    _model[zeroPosition.X,
-                        zeroPosition.Y]); // Tuples which enables swapping two variables without a temporary one;
+            (_model[zeroPosition.Item1, zeroPosition.Item2], _model[_userMove.Item1, _userMove.Item2]) =
+                (_model[_userMove.Item1, _userMove.Item2],
+                    _model[zeroPosition.Item1,
+                        zeroPosition.Item2]); // Tuples which enables swapping two variables without a temporary one;
             // Displaying the playing field on the buttons.
-            SetCurrentArrIntoButtonsText(sender, e);
+            UpdateGameField();
         }
         // Check left square.
-        else if (UserMove.Y - 1 >= 0 && _model[UserMove.X, UserMove.Y - 1] == 0)
+        else if (_userMove.Item2 - 1 >= 0 && _model[_userMove.Item1, _userMove.Item2 - 1] == "")
         {
             // If an empty square is found here, change the user's move with an empty square.
-            (_model[zeroPosition.X, zeroPosition.Y], _model[UserMove.X, UserMove.Y]) =
-                (_model[UserMove.X, UserMove.Y],
-                    _model[zeroPosition.X,
-                        zeroPosition.Y]); // Tuples which enables swapping two variables without a temporary one;
+            (_model[zeroPosition.Item1, zeroPosition.Item2], _model[_userMove.Item1, _userMove.Item2]) =
+                (_model[_userMove.Item1, _userMove.Item2],
+                    _model[zeroPosition.Item1,
+                        zeroPosition.Item2]); // Tuples which enables swapping two variables without a temporary one;
             // Displaying the playing field on the buttons.
-            SetCurrentArrIntoButtonsText(sender, e);
+            UpdateGameField();
         }
-        else if (UserMove.Y + 1 <= 3 && _model[UserMove.X, UserMove.Y + 1] == 0)
+        else if (_userMove.Item2 + 1 <= 3 && _model[_userMove.Item1, _userMove.Item2 + 1] == "")
         {
             // If an empty square is found here, change the user's move with an empty square.
-            (_model[zeroPosition.X, zeroPosition.Y], _model[UserMove.X, UserMove.Y]) =
-                (_model[UserMove.X, UserMove.Y],
-                    _model[zeroPosition.X,
-                        zeroPosition.Y]); // Tuples which enables swapping two variables without a temporary one;
+            (_model[zeroPosition.Item1, zeroPosition.Item2], _model[_userMove.Item1, _userMove.Item2]) =
+                (_model[_userMove.Item1, _userMove.Item2],
+                    _model[zeroPosition.Item1,
+                        zeroPosition.Item2]); // Tuples which enables swapping two variables without a temporary one;
             // Displaying the playing field on the buttons.
-            SetCurrentArrIntoButtonsText(sender, e);
+            UpdateGameField();
         }
 
         CountingButtonsInTheirPlacesasPercentage(sender, e);
@@ -215,20 +166,9 @@ public class FifteenPresenter
 
             n--;
         }
-    }
 
-    // Displaying the playing field on the buttons.
-    private void SetCurrentArrIntoButtonsText(object sender, EventArgs e)
-    {
-        var k = 1;
-        for (var i = 0; i < 4; i++)
-        for (var j = 0; j < 4; j++)
-            foreach (Control control in ((Form)sender).Controls)
-                if (control is Button button && button.Name == "gameField_button" + k)
-                {
-                    button.Text = _model[i, j] == 0 ? "" : _model[i, j].ToString();
-                    k++;
-                }
+        // Update the game field from _model to _view.
+        UpdateGameField();
     }
 
     // Counting the number of buttons in their places as a percentage.
@@ -238,37 +178,37 @@ public class FifteenPresenter
         for (var i = 0; i < 4; i++)
         for (var j = 0; j < 4; j++)
         {
-            if (i == 0 && j == 0 && _model[0, 0] == 1) count++;
+            if (i == 0 && j == 0 && _model[0, 0] == "1") count++;
 
-            if (i == 0 && j == 1 && _model[0, 1] == 2) count++;
+            if (i == 0 && j == 1 && _model[0, 1] == "2") count++;
 
-            if (i == 0 && j == 2 && _model[0, 2] == 3) count++;
+            if (i == 0 && j == 2 && _model[0, 2] == "3") count++;
 
-            if (i == 0 && j == 3 && _model[0, 3] == 4) count++;
+            if (i == 0 && j == 3 && _model[0, 3] == "4") count++;
 
-            if (i == 1 && j == 0 && _model[1, 0] == 5) count++;
+            if (i == 1 && j == 0 && _model[1, 0] == "5") count++;
 
-            if (i == 1 && j == 1 && _model[1, 1] == 6) count++;
+            if (i == 1 && j == 1 && _model[1, 1] == "6") count++;
 
-            if (i == 1 && j == 2 && _model[1, 2] == 7) count++;
+            if (i == 1 && j == 2 && _model[1, 2] == "7") count++;
 
-            if (i == 1 && j == 3 && _model[1, 3] == 8) count++;
+            if (i == 1 && j == 3 && _model[1, 3] == "8") count++;
 
-            if (i == 2 && j == 0 && _model[2, 0] == 9) count++;
+            if (i == 2 && j == 0 && _model[2, 0] == "9") count++;
 
-            if (i == 2 && j == 1 && _model[2, 1] == 10) count++;
+            if (i == 2 && j == 1 && _model[2, 1] == "10") count++;
 
-            if (i == 2 && j == 2 && _model[2, 2] == 11) count++;
+            if (i == 2 && j == 2 && _model[2, 2] == "11") count++;
 
-            if (i == 2 && j == 3 && _model[2, 3] == 12) count++;
+            if (i == 2 && j == 3 && _model[2, 3] == "12") count++;
 
-            if (i == 3 && j == 0 && _model[3, 0] == 13) count++;
+            if (i == 3 && j == 0 && _model[3, 0] == "13") count++;
 
-            if (i == 3 && j == 1 && _model[3, 1] == 14) count++;
+            if (i == 3 && j == 1 && _model[3, 1] == "14") count++;
 
-            if (i == 3 && j == 2 && _model[3, 2] == 15) count++;
+            if (i == 3 && j == 2 && _model[3, 2] == "15") count++;
 
-            if (i == 3 && j == 3 && _model[3, 3] == 0) count++;
+            if (i == 3 && j == 3 && _model[3, 3] == "") count++;
         }
 
         foreach (Control control in ((Form)sender).Controls)
